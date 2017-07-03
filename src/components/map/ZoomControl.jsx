@@ -1,24 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './zoom.scss';
 import { zoomConfig } from './mapConfig';
 
 const ZoomControl = (props) => {
-  zoom() {
+  const { map, type } = props;
+
+  const zoom = () => {
     const currentZoom = map.getZoom();
-    if (props.type === 'increase') {
-      props.map.setZoom(currentZoom + zoomConfig.increment);
+    if (type === 'increase') {
+      map.setZoom(currentZoom + zoomConfig.increment);
     } else {
-      props.map.setZoom(currentZoom - zoomConfig.increment);
+      map.setZoom(currentZoom - zoomConfig.increment);
     }
   }
 
   if (type === 'increase') {
     return (
-      <button onClick={() => zoom()}>+</button>
+      <button className="zoom__btn increase" onClick={() => zoom()}>+</button>
     )
   } else {
     return (
-      <button onClick={() => zoom()}>-</button>
+      <button className="zoom__btn decrease" onClick={() => zoom()}>-</button>
     )
   }
 }
@@ -26,3 +29,5 @@ const ZoomControl = (props) => {
 ZoomControl.propTypes = {
   type: PropTypes.string.isRequired,
 }
+
+export default ZoomControl;

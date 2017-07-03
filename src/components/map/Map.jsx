@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import './map.scss';
 const $script =  require('scriptjs');
 import { mapConfig } from './mapConfig';
+import ZoomControl from './ZoomControl';
 
 class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
+      map: null,
     }
   }
 
   initMap() {
-    const map = new google.maps.Map(this.el, mapConfig);
+    this.setState({map: new google.maps.Map(this.el, mapConfig)});
   }
 
   componentWillMount() {
@@ -26,9 +28,21 @@ class Map extends Component {
   }
 
   render() {
-    return (
-      this.state.loading ? (<div>loading</div>) : (<div className='map' ref={el => this.el = el}>map</div>)
-    );
+    if (this.state.loading) {
+      return (
+        <div>loading</div>
+      );
+    } else {
+      return (
+        <div className="map__container">
+          <div className='map' ref={el => this.el = el} />
+          <div className="zoom__container">
+            <ZoomControl type="increase" map={this.state.map} />
+            <ZoomControl type="decrease" map={this.state.map} />
+          </div>
+        </div>
+      );
+    }
   }
 }
 
