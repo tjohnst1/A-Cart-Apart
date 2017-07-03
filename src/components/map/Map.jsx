@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import './map.scss';
 const $script =  require('scriptjs');
+import { mapConfig } from './mapConfig';
 
 class Map extends Component {
   constructor(props) {
@@ -10,11 +12,7 @@ class Map extends Component {
   }
 
   initMap() {
-    const portland = {lat: 45.5176391, lng: -122.6683785};
-    const map = new google.maps.Map(this.el, {
-      zoom: 12,
-      center: portland
-    });
+    const map = new google.maps.Map(this.el, mapConfig);
   }
 
   componentWillMount() {
@@ -25,12 +23,11 @@ class Map extends Component {
       });
       this.initMap();
     });
-
   }
 
   render() {
     return (
-      this.state.loading ? (<div>loading</div>) : (<div style={{width: '400px', height: '400px', background: 'grey'}} ref={el => this.el = el}>map</div>)
+      this.state.loading ? (<div>loading</div>) : (<div className='map' ref={el => this.el = el}>map</div>)
     );
   }
 }

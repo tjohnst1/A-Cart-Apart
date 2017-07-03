@@ -1,11 +1,11 @@
 import React from 'react';
-import Map from '../components/Map';
+import Map from '../components/map/Map';
 
 const Index = () => {
   return (
-    <div>
+    <main>
       <Map />
-    </div>
+    </main>
   )
 };
 
