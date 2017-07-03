@@ -1,6 +1,11 @@
 var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var DotenvPlugin = require('dotenv-webpack');
+
+var importEnv = new DotenvPlugin({
+  path: './config.env', // Path to .env file (this is the default)
+})
 
 var extractHtml = new HtmlWebpackPlugin({
   title: 'PDX Food Carts',
@@ -58,7 +63,7 @@ module.exports = {
       }
     ]
   },
-  plugins: [extractStyles, extractHtml],
+  plugins: [extractStyles, extractHtml, importEnv],
   resolve: {
     extensions: ['.js', '.jsx'],
   }
