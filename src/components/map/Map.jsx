@@ -36,10 +36,11 @@ class Map extends Component {
         var markerPos = {lat: cartData.location.lat, lng: cartData.location.lng};
         var marker = new google.maps.Marker({
           position: markerPos,
-          map: this.state.map
+          map: this.state.map,
         });
         marker.addListener('click', () => {
-          this.props.handleShowCartInfo(cartData.id)
+          this.props.handleShowCartInfo(cartData.id);
+          this.state.map.panTo(markerPos);
         });
       });
       this.setState({markersPlaced: true});
