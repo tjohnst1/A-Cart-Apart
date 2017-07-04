@@ -1,7 +1,8 @@
 import database from '../database/firebase';
 
-const REQUEST_CART_DATA = 'REQUEST_CART_DATA';
-const RECEIVE_CART_DATA = 'RECEIVE_CART_DATA';
+export const REQUEST_CART_DATA = 'REQUEST_CART_DATA';
+export const RECEIVE_CART_DATA = 'RECEIVE_CART_DATA';
+export const SHOW_CART_INFO = 'SHOW_CART_INFO';
 
 export function getCartDataIfNeeded(state) {
   return (dispatch, getState) => {
@@ -21,10 +22,10 @@ function fetchCartData() {
   }
 }
 
-function receiveCartData(data) {
+function receiveCartData(cartData) {
   return {
     type: RECEIVE_CART_DATA,
-    cartData: data,
+    cartData,
   }
 }
 
@@ -35,8 +36,15 @@ function requestCartData() {
 }
 
 function shouldFetchCartData(state) {
-  if (state.carts) {
+  if (state.cartData) {
     return true;
   }
   return false;
+}
+
+export function showCartInfo(id) {
+  return {
+    type: SHOW_CART_INFO,
+    id
+  }
 }
