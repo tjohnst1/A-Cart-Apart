@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Map from '../components/map/Map';
+import { getCartDataIfNeeded } from '../actions/carts'
 
-const Index = () => {
-  return (
-    <main>
-      <Map />
-    </main>
-  )
+class Index extends Component {
+  componentWillMount() {
+    this.props.dispatch(getCartDataIfNeeded());
+  }
+
+  render() {
+    return (
+      <main>
+        <Map />
+      </main>
+    )
+  }
 };
 
-export default Index;
+const mapStateToProps = (state) => {
+  const { carts } = state;
+  return {
+    carts
+  }
+}
+
+export default connect(mapStateToProps)(Index)
