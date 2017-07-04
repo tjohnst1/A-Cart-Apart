@@ -3,6 +3,7 @@ import './map.scss';
 const $script =  require('scriptjs');
 import { mapConfig } from './mapConfig';
 import ZoomControl from './ZoomControl';
+import InfoPanel from '../infoPanel/InfoPanel';
 
 class Map extends Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class Map extends Component {
       return (
         <div className="map__container">
           <div className='map' ref={el => this.el = el} />
+          <InfoPanel />
           <div className="zoom__container">
             <ZoomControl type="increase" map={this.state.map} />
             <ZoomControl type="decrease" map={this.state.map} />

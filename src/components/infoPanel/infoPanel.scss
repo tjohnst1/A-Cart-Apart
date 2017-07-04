@@ -1,0 +1,19 @@
+.info-panel {
+  position: fixed;
+  left: 2.5%;
+  background: white;
+  width: 30%;
+  top: 5%;
+  z-index: 10;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.17);
+}
+
+.info-panel__headline {
+  font-size: 2em;
+  margin: 0;
+  background: $red;
+  color: white;
+  display: block;
+  padding: 0.5em 1em;
+  font-weight: 200;
+}

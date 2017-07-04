@@ -1,8 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,600,800');
+
 html, body, #root, main {
   width: 100%;
   height: 100%;
 }
 
 body {
+  font-family: 'Montserrat', sans-serif;
   min-height: 100%;
+  color: #333333;
+  font-size: 10px;
 }
