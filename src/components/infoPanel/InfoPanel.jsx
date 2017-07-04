@@ -1,7 +1,7 @@
 import React from 'react';
 import './infoPanel.scss';
 import CartInfo from './CartInfo'
-import foodCarts from '../../data/data'
+import foodCarts from '../../database/data'
 
 const InfoPanel = (props) => {
   return (

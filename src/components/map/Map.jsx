@@ -20,7 +20,7 @@ class Map extends Component {
 
   componentWillMount() {
     // load google maps script
-    $script(`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAP_API}`, () => {
+    $script(`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAP_KEY}`, () => {
       this.setState({
         loading: false,
       });

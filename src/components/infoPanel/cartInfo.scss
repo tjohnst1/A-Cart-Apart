@@ -30,14 +30,11 @@
 .cart-info__hours {
   background: $light-grey;
   width: 100%;
-  padding: 10px;
+  padding: 0 10px 10px 10px;
   margin: 10px 0 0 0;
   font-size: 1.3em;
   font-weight: 200;
   td {
     padding: 10px 0 0 0;
-    &:first-of-type {
-      padding: 0;
-    }
   }
 }
