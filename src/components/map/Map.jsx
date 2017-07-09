@@ -4,51 +4,49 @@ const $script =  require('scriptjs');
 import { mapConfig } from './mapConfig';
 import ZoomControl from './ZoomControl';
 import InfoPanel from '../infoPanel/InfoPanel';
+import Marker from './Marker';
 
 class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
-      map: null,
-      markersPlaced: false,
+      markers: null,
     }
   }
 
-  initMap() {
-    var map = new google.maps.Map(this.el, mapConfig);
-    this.setState({map: map});
-  }
-
+  // load google maps script & initialize the map
   componentDidMount() {
-    // load google maps script
     $script(`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAP_KEY}`, () => {
       this.setState({
         loading: false,
       });
-      this.initMap();
+      var map = new google.maps.Map(this.el, mapConfig);
+      this.props.handleStoreMapReference(map);
     });
   }
 
+  // place the markers when the map reference is available
   componentDidUpdate() {
-    if ((this.props.cartData.length > 0) && !this.state.markersPlaced) {
-      this.props.cartData.forEach((cartData) => {
-        var markerPos = {lat: cartData.location.lat, lng: cartData.location.lng};
-        var marker = new google.maps.Marker({
-          position: markerPos,
-          map: this.state.map,
-        });
-        marker.addListener('click', () => {
-          this.props.handleShowCartInfo(cartData.id);
-          this.state.map.panTo(markerPos);
-        });
-      });
-      this.setState({markersPlaced: true});
+    const { mapReference, cartData, handleStoreMarkerReferences, markerData } = this.props;
+    if ((cartData.length > 0) && mapReference && !markerData) {
+      handleStoreMarkerReferences(cartData);
     }
   }
 
+  createMarkers(markerData, mapReference, handleShowCartInfo) {
+    if (!markerData) {
+      return null;
+    }
+    return markerData.map(markerObj => {
+      const { id, reference, position } = markerObj;
+      return <Marker key={id} id={id} reference={reference} mapReference={mapReference} position={position} handleShowCartInfo={handleShowCartInfo} />;
+    })
+  }
+
   render() {
-    const { currentCart } = this.props;
+    const { currentCart, categories, cartData, mapReference, handleShowCartInfo, markerData } = this.props;
+    const markerElements = this.createMarkers(markerData, mapReference, handleShowCartInfo);
     if (this.state.loading) {
       return (
         <div>loading</div>
@@ -57,11 +55,12 @@ class Map extends Component {
       return (
         <div className="map__container">
           <div className='map' ref={el => this.el = el} />
-          <InfoPanel currentCart={currentCart} />
+          <InfoPanel currentCart={currentCart} categories={categories}/>
           <div className="zoom__container">
             <ZoomControl type="increase" map={this.state.map} />
             <ZoomControl type="decrease" map={this.state.map} />
           </div>
+          { markerElements }
         </div>
       );
     }

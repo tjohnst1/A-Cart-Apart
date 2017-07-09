@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Map from '../components/map/Map';
 import { getCartDataIfNeeded, showCartInfo } from '../actions/carts'
+import { storeMapReference, storeMarkerReferences } from '../actions/map'
 
 class Index extends Component {
   componentWillMount() {
@@ -9,14 +10,15 @@ class Index extends Component {
   }
 
   render() {
-    const { cartData, currentCart } = this.props.cartData;
-    const { handleShowCartInfo } = this.props;
-    console.log(this.props)
+    const { cartData, currentCart, categories } = this.props.cartData;
+    const { mapReference, markers } = this.props.map;
+    const { handleShowCartInfo, handleStoreMapReference, handleStoreMarkerReferences } = this.props;
 
     if (cartData) {
       return (
         <main>
-          <Map cartData={cartData} currentCart={currentCart} handleShowCartInfo={handleShowCartInfo}/>
+          <Map mapReference={mapReference} cartData={cartData} currentCart={currentCart} handleShowCartInfo={handleShowCartInfo} categories={categories}
+            handleStoreMapReference={handleStoreMapReference} handleStoreMarkerReferences={handleStoreMarkerReferences} markerData={markers} />
         </main>
       )
     } else {
@@ -26,10 +28,10 @@ class Index extends Component {
 };
 
 const mapStateToProps = (state) => {
-  const { cartData, currentCart } = state;
+  const { cartData, map } = state;
   return {
     cartData,
-    currentCart,
+    map
   }
 }
 
@@ -39,7 +41,13 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(showCartInfo(id));
     },
     handleGetCartDataIfNeeded: () => {
-      dispatch(getCartDataIfNeeded())
+      dispatch(getCartDataIfNeeded());
+    },
+    handleStoreMapReference: (map) => {
+      dispatch(storeMapReference(map));
+    },
+    handleStoreMarkerReferences: (markers) => {
+      dispatch(storeMarkerReferences(markers));
     }
   }
 }
