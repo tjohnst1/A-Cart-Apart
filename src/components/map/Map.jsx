@@ -11,7 +11,6 @@ class Map extends Component {
     super(props);
     this.state = {
       loading: true,
-      markers: null,
     }
   }
 
@@ -26,11 +25,11 @@ class Map extends Component {
     });
   }
 
-  // place the markers when the map reference is available
+  // initialize the markers when the map reference is available
   componentDidUpdate() {
-    const { mapReference, cartData, handleStoreMarkerReferences, markerData } = this.props;
+    const { mapReference, cartData, handleInitializeMarkers, markerData } = this.props;
     if ((cartData.length > 0) && mapReference && !markerData) {
-      handleStoreMarkerReferences(cartData);
+      handleInitializeMarkers(cartData);
     }
   }
 
@@ -45,7 +44,7 @@ class Map extends Component {
   }
 
   render() {
-    const { currentCart, categories, cartData, mapReference, handleShowCartInfo, markerData } = this.props;
+    const { currentCart, cartData, mapReference, handleShowCartInfo, markerData } = this.props;
     const markerElements = this.createMarkers(markerData, mapReference, handleShowCartInfo);
     if (this.state.loading) {
       return (
@@ -55,7 +54,7 @@ class Map extends Component {
       return (
         <div className="map__container">
           <div className='map' ref={el => this.el = el} />
-          <InfoPanel currentCart={currentCart} categories={categories}/>
+          <InfoPanel currentCart={currentCart} />
           <div className="zoom__container">
             <ZoomControl type="increase" map={this.state.map} />
             <ZoomControl type="decrease" map={this.state.map} />

@@ -11,7 +11,6 @@ export default class Marker extends Component {
   componentDidMount() {
     const { mapReference, position, id, handleShowCartInfo } = this.props;
     const markerReference = this.props.reference;
-
     this.addOnClick(markerReference, mapReference, position, id, handleShowCartInfo);
   }
 
