@@ -4,14 +4,14 @@ import './zoom.scss';
 import { zoomConfig } from './mapConfig';
 
 const ZoomControl = (props) => {
-  const { map, type } = props;
+  const { mapReference, type } = props;
 
   const zoom = () => {
-    const currentZoom = map.getZoom();
+    const currentZoom = mapReference.getZoom();
     if (type === 'increase') {
-      map.setZoom(currentZoom + zoomConfig.increment);
+      mapReference.setZoom(currentZoom + zoomConfig.increment);
     } else {
-      map.setZoom(currentZoom - zoomConfig.increment);
+      mapReference.setZoom(currentZoom - zoomConfig.increment);
     }
   }
 

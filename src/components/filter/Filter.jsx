@@ -5,7 +5,7 @@ import { filterMarkers } from '../../actions/map'
 import './filter.scss';
 
 const Filter = (props) => {
-  const { categories, filter, handleFilterMarkers } = props;
+  const { categories, filter, showFilter, handleFilterMarkers } = props;
 
   const filterCheckboxes = categories.map((category, i) => {
     const formattedName = kebabCase(category)
@@ -16,20 +16,27 @@ const Filter = (props) => {
     )
   })
 
-  return (
-    <div>
-      <h3>Filters</h3>
-      {filterCheckboxes}
-    </div>
-  )
+  if (showFilter){
+    return (
+      <div className="filter__container">
+        <h3>Filters</h3>
+        {filterCheckboxes}
+      </div>
+    );
+  } else {
+    return null;
+  }
+
+
 }
 
 function mapStateToProps(state) {
   const { categories } = state.cartData;
-  const { filter } = state.map;
+  const { filter, showFilter } = state.map;
   return {
     categories,
     filter,
+    showFilter,
   }
 }
 

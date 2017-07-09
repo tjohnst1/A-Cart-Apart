@@ -1,6 +1,10 @@
 .map__container {
   height: 100%;
   width: 100%;
+  display: inline-block;
+  &.show-filter {
+    width: 80%;
+  }
 }
 
 .map {

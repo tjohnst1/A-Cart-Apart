@@ -5,6 +5,7 @@ import { mapConfig } from './mapConfig';
 import ZoomControl from './ZoomControl';
 import InfoPanel from '../infoPanel/InfoPanel';
 import Marker from './Marker';
+import classNames from 'classnames'
 
 class Map extends Component {
   constructor(props) {
@@ -44,20 +45,24 @@ class Map extends Component {
   }
 
   render() {
-    const { currentCart, cartData, mapReference, handleShowCartInfo, markerData } = this.props;
+    const { currentCart, cartData, mapReference, handleShowCartInfo, markerData, showFilter, handleToggleFilter } = this.props;
     const markerElements = this.createMarkers(markerData, mapReference, handleShowCartInfo);
+    const containerClasses = classNames({
+      "map__container": true,
+      "show-filter": showFilter,
+    })
     if (this.state.loading) {
       return (
         <div>loading</div>
       );
     } else {
       return (
-        <div className="map__container">
+        <div className={containerClasses}>
           <div className='map' ref={el => this.el = el} />
-          <InfoPanel currentCart={currentCart} />
+          <InfoPanel currentCart={currentCart} handleToggleFilter={handleToggleFilter}/>
           <div className="zoom__container">
-            <ZoomControl type="increase" map={this.state.map} />
-            <ZoomControl type="decrease" map={this.state.map} />
+            <ZoomControl type="increase" mapReference={mapReference} />
+            <ZoomControl type="decrease" mapReference={mapReference} />
           </div>
           { markerElements }
         </div>

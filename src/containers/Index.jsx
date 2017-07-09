@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Map from '../components/map/Map';
 import { getCartDataIfNeeded, showCartInfo } from '../actions/carts'
-import { storeMapReference, initializeMarkers } from '../actions/map'
+import { storeMapReference, initializeMarkers, toggleFilter } from '../actions/map'
+import Filter from '../components/filter/Filter'
 
 class Index extends Component {
   componentWillMount() {
@@ -11,14 +12,15 @@ class Index extends Component {
 
   render() {
     const { cartData, currentCart, categories } = this.props.cartData;
-    const { mapReference, markers } = this.props.map;
-    const { handleShowCartInfo, handleStoreMapReference, handleInitializeMarkers } = this.props;
+    const { mapReference, markers, showFilter } = this.props.map;
+    const { handleShowCartInfo, handleStoreMapReference, handleInitializeMarkers, handleToggleFilter } = this.props;
 
     if (cartData) {
       return (
         <main>
           <Map mapReference={mapReference} cartData={cartData} currentCart={currentCart} handleShowCartInfo={handleShowCartInfo} categories={categories}
-            handleStoreMapReference={handleStoreMapReference} handleInitializeMarkers={handleInitializeMarkers} markerData={markers} />
+            handleStoreMapReference={handleStoreMapReference} handleInitializeMarkers={handleInitializeMarkers} markerData={markers} showFilter={showFilter} handleToggleFilter={handleToggleFilter} />
+          <Filter />
         </main>
       )
     } else {
@@ -48,7 +50,10 @@ const mapDispatchToProps = (dispatch) => {
     },
     handleInitializeMarkers: (markers) => {
       dispatch(initializeMarkers(markers));
-    }
+    },
+    handleToggleFilter: () => {
+      dispatch(toggleFilter());
+    },
   }
 }
 

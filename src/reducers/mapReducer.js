@@ -1,10 +1,11 @@
 import { intersection } from 'lodash';
-import { STORE_MAP_REFERENCE, STORE_MARKER_REFERENCES, FILTER_MARKERS } from '../actions/map'
+import { STORE_MAP_REFERENCE, STORE_MARKER_REFERENCES, FILTER_MARKERS, TOGGLE_FILTER } from '../actions/map'
 
 const initialState = {
   mapReference: null,
   markers: null,
   filter: [],
+  showFilter: false,
 }
 
 function updateFilters(newFilterItem, currentFilters) {
@@ -40,6 +41,10 @@ export function mapReducer(state = initialState, action) {
         markers
       });
     }
+    case TOGGLE_FILTER:
+      return Object.assign({}, state, {
+        showFilter: !state.showFilter,
+      })
     case FILTER_MARKERS: {
       const newFilter = updateFilters(action.tag, state.filter);
       const markers = state.markers.map(markerObj => {

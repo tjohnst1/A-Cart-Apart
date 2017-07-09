@@ -9,12 +9,21 @@
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.17);
 }
 
+.info-panel__headline-container {
+  background: $red;
+  padding: 0.5em 1em;
+  display: block;
+}
+
 .info-panel__headline {
   font-size: 2em;
   margin: 0;
-  background: $red;
   color: white;
-  display: block;
-  padding: 0.5em 1em;
   font-weight: 200;
+  display: inline-block;
+}
+
+.info-panel__filter-btn {
+  float: right;
+  display: inline-block;
 }
