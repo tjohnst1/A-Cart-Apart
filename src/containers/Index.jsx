@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import Map from '../components/map/Map';
 import { getCartDataIfNeeded, showCartInfo } from '../actions/carts'
 import { storeMapReference, initializeMarkers, toggleFilter } from '../actions/map'
-import Filter from '../components/filter/Filter'
+import SideBar from '../components/sideBar/SideBar'
+import MenuBar from '../components/menubar/MenuBar'
+import InfoPanel from '../components/infoPanel/InfoPanel'
 
 class Index extends Component {
   componentWillMount() {
@@ -17,11 +19,15 @@ class Index extends Component {
 
     if (cartData) {
       return (
-        <main>
-          <Map mapReference={mapReference} cartData={cartData} currentCart={currentCart} handleShowCartInfo={handleShowCartInfo} categories={categories}
-            handleStoreMapReference={handleStoreMapReference} handleInitializeMarkers={handleInitializeMarkers} markerData={markers} showFilter={showFilter} handleToggleFilter={handleToggleFilter} />
-          <Filter />
-        </main>
+        <div style={{width: '100%', height: '100%'}}>
+          <MenuBar />
+          <main>
+            <InfoPanel currentCart={currentCart} />
+            <SideBar handleToggleFilter={handleToggleFilter} showFilter={showFilter} currentCart={currentCart}/>
+            <Map mapReference={mapReference} cartData={cartData} currentCart={currentCart} handleShowCartInfo={handleShowCartInfo} categories={categories}
+              handleStoreMapReference={handleStoreMapReference} handleInitializeMarkers={handleInitializeMarkers} markerData={markers} showFilter={showFilter} handleToggleFilter={handleToggleFilter} />
+          </main>
+        </div>
       )
     } else {
       return (<main>Loading...</main>)
