@@ -45,10 +45,16 @@ class Map extends Component {
   }
 
   render() {
-    const { currentCart, cartData, mapReference, handleShowCartInfo, markerData, showFilter, handleToggleFilter } = this.props;
+    const { cartData, mapReference, handleShowCartInfo, markerData, showFilter, handleToggleFilter } = this.props;
     const markerElements = this.createMarkers(markerData, mapReference, handleShowCartInfo);
     const containerClasses = classNames({
       "map__container": true,
+      "col-xs-12": true,
+      "col--10": true,
+      "show-filter": showFilter,
+    })
+    const zoomClasses = classNames({
+      "zoom__container": true,
       "show-filter": showFilter,
     })
     if (this.state.loading) {
@@ -59,8 +65,7 @@ class Map extends Component {
       return (
         <div className={containerClasses}>
           <div className='map' ref={el => this.el = el} />
-          <InfoPanel currentCart={currentCart} handleToggleFilter={handleToggleFilter}/>
-          <div className="zoom__container">
+          <div className={zoomClasses}>
             <ZoomControl type="increase" mapReference={mapReference} />
             <ZoomControl type="decrease" mapReference={mapReference} />
           </div>

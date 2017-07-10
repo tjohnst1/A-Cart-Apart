@@ -1,11 +1,31 @@
 .filter__container {
-  display: inline-block;
-  width: 20%;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  text-align: left;
+  padding: 1em 0 1em 2em;
 }
 
-
 .filter__input-group {
-  display: block;
-  margin-top: 5px;
+  display: inherit;
+  margin-top: 10px;
   font-size: 1.4em;
+  flex: 0 0 33%;
+  label {
+    margin-left: 5px;
+  }
+  &:nth-child(-n+3) {
+    margin-top: 0;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .filter__container {
+    display: block;
+  }
+  .filter__input-group {
+    display: block;
+    margin-top: 10px !important;
+    width: 100%;
+  }
 }

@@ -1,9 +1,15 @@
 .map__container {
   height: 100%;
   width: 100%;
-  display: inline-block;
-  &.show-filter {
-    width: 80%;
+  display: block;
+}
+
+@media only screen and (min-width: 768px) {
+  .map__container {
+    width: calc(100% - 75px);
+    &.show-filter {
+      width: calc(80% - 75px);
+    }
   }
 }
 

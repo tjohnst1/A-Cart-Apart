@@ -2,6 +2,9 @@
   background: $red;
   display: block;
   padding: 1em;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  position: relative;
 }
 
 .menu-bar__logo {
