@@ -19,6 +19,7 @@ const Filter = (props) => {
   if (showFilter){
     return (
       <div className="filter__container">
+        <h3 className="filter__headline">Categories</h3>
         {filterCheckboxes}
       </div>
     );

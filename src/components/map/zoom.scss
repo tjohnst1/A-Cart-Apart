@@ -11,13 +11,17 @@
   display: block;
   cursor: pointer;
   text-align: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: .75em;
   border: 0;
   background: rgba(0, 0, 0, 0.7);
   color: white;
+  padding: .75em;
   &.decrease {
     margin-top: 5px;
+  }
+  svg {
+    fill: $light-grey;
   }
 }

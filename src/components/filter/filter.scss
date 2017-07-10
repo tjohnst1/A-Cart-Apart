@@ -3,7 +3,17 @@
   flex-wrap: wrap;
   width: 100%;
   text-align: left;
-  padding: 1em 0 1em 2em;
+  padding: 1em 2em;
+}
+
+.filter__headline {
+  margin: 0 0 .5em 0;
+  padding: 0 0 .5em 0;
+  width: 100%;
+  border-bottom: 1px solid $medium-grey;
+  color: $medium-grey;
+  font-weight: 400;
+  font-size: 1.4em;
 }
 
 .filter__input-group {
