@@ -14,15 +14,14 @@ class Index extends Component {
     const { cartData, currentCart, categories } = this.props.cartData;
     const { mapReference, markers, showFilter } = this.props.map;
     const { handleShowCartInfo, handleStoreMapReference, handleInitializeMarkers, handleToggleFilter } = this.props;
-    // <SideBar handleToggleFilter={handleToggleFilter} showFilter={showFilter} currentCart={currentCart}/>
 
     if (cartData) {
       return (
         <div style={{width: '100%', height: '100%'}}>
           <main>
-            <InfoPanel currentCart={currentCart} handleToggleFilter={handleToggleFilter}/>
+            <InfoPanel currentCart={currentCart} handleToggleFilter={handleToggleFilter} showFilter={showFilter}/>
             <Map mapReference={mapReference} cartData={cartData} currentCart={currentCart} handleShowCartInfo={handleShowCartInfo} categories={categories}
-              handleStoreMapReference={handleStoreMapReference} handleInitializeMarkers={handleInitializeMarkers} markerData={markers} showFilter={showFilter} handleToggleFilter={handleToggleFilter} />
+              handleStoreMapReference={handleStoreMapReference} handleInitializeMarkers={handleInitializeMarkers} markerData={markers} handleToggleFilter={handleToggleFilter} />
           </main>
         </div>
       )
@@ -54,8 +53,9 @@ const mapDispatchToProps = (dispatch) => {
     handleInitializeMarkers: (markers) => {
       dispatch(initializeMarkers(markers));
     },
-    handleToggleFilter: () => {
-      dispatch(toggleFilter());
+    handleToggleFilter: (bool) => {
+      dispatch(toggleFilter(bool));
+      dispatch(showCartInfo(null));
     },
   }
 }

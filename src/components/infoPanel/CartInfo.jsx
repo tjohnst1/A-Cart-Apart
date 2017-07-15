@@ -6,6 +6,7 @@ const CartInfo = (params) => {
 
   if (currentCart) {
     const { name, location, tags, phoneNumber, social, hours, facebook, twitter, website } = currentCart;
+
     return (
       <div className="cart-info">
         <h2 className="cart-info__headline">{name}</h2>

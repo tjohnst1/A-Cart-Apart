@@ -34,38 +34,29 @@ class Map extends Component {
     }
   }
 
-  createMarkers(markerData, mapReference, handleShowCartInfo) {
+  createMarkers(markerData, mapReference, handleShowCartInfo, handleToggleFilter) {
     if (!markerData) {
       return null;
     }
     return markerData.map(markerObj => {
       const { id, reference, position } = markerObj;
-      return <Marker key={id} id={id} reference={reference} mapReference={mapReference} position={position} handleShowCartInfo={handleShowCartInfo} />;
+      return <Marker key={id} id={id} reference={reference} mapReference={mapReference} position={position}
+        handleShowCartInfo={handleShowCartInfo} handleToggleFilter={handleToggleFilter}/>;
     })
   }
 
   render() {
     const { cartData, mapReference, handleShowCartInfo, markerData, showFilter, handleToggleFilter } = this.props;
-    const markerElements = this.createMarkers(markerData, mapReference, handleShowCartInfo);
-    const containerClasses = classNames({
-      "map__container": true,
-      "col-xs-12": true,
-      "col--10": true,
-      "show-filter": showFilter,
-    })
-    const zoomClasses = classNames({
-      "zoom__container": true,
-      "show-filter": showFilter,
-    })
+    const markerElements = this.createMarkers(markerData, mapReference, handleShowCartInfo, handleToggleFilter);
     if (this.state.loading) {
       return (
         <div>loading</div>
       );
     } else {
       return (
-        <div className={containerClasses}>
+        <div className="map__container">
           <div className='map' ref={el => this.el = el} />
-          <div className={zoomClasses}>
+          <div className="zoom__container">
             <ZoomControl type="increase" mapReference={mapReference} />
             <ZoomControl type="decrease" mapReference={mapReference} />
           </div>

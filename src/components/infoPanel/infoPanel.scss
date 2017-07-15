@@ -1,13 +1,27 @@
 .info-panel {
   background: white;
-  width: 30%;
+  width: 100%;
   min-width: 300px;
   position: fixed;
-  left: 5%;
-  top: 5%;
+  left: 0;
+  top: 40%;
   z-index: 30;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.17);
+  box-shadow: none;
+  height: 60%;
+  max-height: none;
 }
+
+@media only screen and (min-width: 768px) {
+  .info-panel {
+    width: 30%;
+    left: 5%;
+    top: 5%;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.17);
+    height: auto;
+    max-height: 90%;
+  }
+}
+
 
 .info-panel__headline {
   text-align: left;
@@ -46,4 +60,9 @@
       float: right;
     }
   }
+}
+
+.info-panel__details {
+  height: calc(100% - 60px);
+  overflow-y: auto;
 }

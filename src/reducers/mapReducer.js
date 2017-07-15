@@ -42,9 +42,14 @@ export function mapReducer(state = initialState, action) {
       });
     }
     case TOGGLE_FILTER:
+      if (typeof action.value !== 'boolean') {
+        return Object.assign({}, state, {
+          showFilter: !state.showFilter,
+        })
+      }
       return Object.assign({}, state, {
-        showFilter: !state.showFilter,
-      })
+        showFilter: action.value,
+      });
     case FILTER_MARKERS: {
       const newFilter = updateFilters(action.tag, state.filter);
       const markers = state.markers.map(markerObj => {

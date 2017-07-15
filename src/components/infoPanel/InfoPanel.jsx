@@ -5,7 +5,7 @@ import FilterIcon from '../icons/FilterIcon';
 import Filter from '../filter/Filter';
 
 const InfoPanel = (props) => {
-  const { currentCart, handleToggleFilter } = props;
+  const { currentCart, handleToggleFilter, showFilter } = props;
 
   return (
     <div className="info-panel">
@@ -13,8 +13,10 @@ const InfoPanel = (props) => {
         <h1>A Cart Apart</h1>
         <button onClick={() => handleToggleFilter()}><FilterIcon /><span>Filter</span></button>
       </div>
-      <Filter />
-      <CartInfo currentCart={currentCart}/>
+      <div className="info-panel__details">
+        <Filter />
+        { showFilter ? null : <CartInfo currentCart={currentCart} /> }
+      </div>
     </div>
   );
 }

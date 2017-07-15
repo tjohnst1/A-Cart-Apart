@@ -24,8 +24,9 @@ export function filterMarkers(tag) {
   }
 }
 
-export function toggleFilter() {
+export function toggleFilter(value) {
   return {
     type: TOGGLE_FILTER,
+    value
   }
 }
