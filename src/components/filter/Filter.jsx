@@ -11,7 +11,10 @@ const Filter = (props) => {
     const formattedName = kebabCase(category)
     return (
       <div className="filter__input-group" key={i}>
-        <input id={formattedName} name={formattedName} type="checkbox" onChange={() => handleFilterMarkers(category)}/> <label htmlFor={kebabCase(formattedName)}>{category}</label>
+        <label htmlFor={kebabCase(formattedName)}>
+          <input id={formattedName} name={formattedName} type="checkbox" onChange={() => handleFilterMarkers(category)}/> {category}
+          <div className="control-indicator"></div>
+        </label>
       </div>
     )
   })

@@ -21,11 +21,49 @@
   margin-top: 10px;
   font-size: 1.4em;
   flex: 0 0 33%;
-  label {
-    margin-left: 5px;
+  position: relative;
+  input {
+    z-index: -1;
+    position: absolute;
+    opacity: 0;
+    &:checked ~ .control-indicator {
+      background: $blue;
+      &::after {
+        // white checkmark
+        content: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMjEzLjEgMTcyLjgiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDIxMy4xIDE3Mi44OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHN0eWxlIHR5cGU9InRleHQvY3NzIj4uc3Qwe2ZpbGw6I0ZGRkZGRjt9PC9zdHlsZT48Zz48cGF0aCBjbGFzcz0ic3QwIiBkPSJNNzIsMTcyLjhjLTIzLTIyLjYtNDcuNS00Ni42LTcyLTcwLjVDMTIuMSw5MC41LDI0LDc5LDM2LjEsNjcuM0M0Ny44LDc5LjEsNjAuMyw5MS44LDcyLjQsMTA0YzM1LjYtMzUuMiw3MC42LTY5LjksMTA1LjItMTA0YzEyLDExLjYsMjMuNSwyMi44LDM1LjQsMzQuNEMxNjUuOSw4MC43LDExOC42LDEyNyw3MiwxNzIuOHoiLz48L2c+PC9zdmc+);
+      }
+    }
   }
-  &:nth-child(-n+3) {
+  label {
+    padding-left: 25px;
+    line-height: 20px;
+    &:hover .control-indicator {
+      background: lighten($blue, 5%);
+      &::after {
+        // white checkmark
+        content: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMjEzLjEgMTcyLjgiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDIxMy4xIDE3Mi44OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHN0eWxlIHR5cGU9InRleHQvY3NzIj4uc3Qwe2ZpbGw6I0ZGRkZGRjt9PC9zdHlsZT48Zz48cGF0aCBjbGFzcz0ic3QwIiBkPSJNNzIsMTcyLjhjLTIzLTIyLjYtNDcuNS00Ni42LTcyLTcwLjVDMTIuMSw5MC41LDI0LDc5LDM2LjEsNjcuM0M0Ny44LDc5LjEsNjAuMyw5MS44LDcyLjQsMTA0YzM1LjYtMzUuMiw3MC42LTY5LjksMTA1LjItMTA0YzEyLDExLjYsMjMuNSwyMi44LDM1LjQsMzQuNEMxNjUuOSw4MC43LDExOC42LDEyNyw3MiwxNzIuOHoiLz48L2c+PC9zdmc+);
+      }
+    }
+  }
+  &:nth-child(-n+4) {
     margin-top: 0;
+  }
+  .control-indicator {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 0;
+    top: 0;
+    background: $light-grey;
+    border-radius: 5px;
+    &:after {
+      position: absolute;
+      left: calc(50% - 7px);
+      color: white;
+      height: 14px;
+      width: 14px;
+      z-index: 10;
+    }
   }
 }
 
