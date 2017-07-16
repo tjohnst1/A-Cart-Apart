@@ -2,7 +2,7 @@ import React from 'react';
 
 const ZoomOutIcon = () => {
   return (
-    <svg className='zoom-icon' version='1.1' id='Layer_1' x='0px' y='0px' viewBox='3.9 30.1 170 169.9' style={{enableBackground:'new 3 29.7 172.3 172.1;'}}>
+    <svg className='zoom-icon' version='1.1' id='Layer_1' x='0px' y='0px' viewBox='3.9 30.1 170 169.9' style={{enableBackground:'new 3 29.7 172.3 172.1'}}>
       <g>
       	<path d='M112.8,148.5C78,174.6,37.7,163,18.5,138.3c-21.1-27-19.1-64.6,4.8-88.5s61-26.2,87.8-5.9
       		c25.5,19.3,37.4,61.2,10.7,95.8c1.7,1.4,3.7,2.7,5.4,4.3c14.4,14.3,28.8,28.6,43.2,43c1.2,1.2,2.6,2.6,3.1,4.2
