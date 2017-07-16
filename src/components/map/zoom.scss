@@ -25,11 +25,17 @@
   background: rgba(0, 0, 0, 0.7);
   color: white;
   padding: .75em;
+  &:hover {
+    background: rgba(0, 0, 0, 0.9);
+  }
   &:focus {
     outline: none;
   }
   &.decrease {
     margin-top: 5px;
+  }
+  &:active {
+    transform: scale(0.95);
   }
   svg {
     fill: $light-grey;

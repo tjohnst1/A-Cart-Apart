@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './cartInfo.scss'
 
 const CartInfo = (params) => {
   const { currentCart } = params;
 
   if (currentCart) {
-    const { name, location, tags, phoneNumber, social, hours, facebook, twitter, website } = currentCart;
+    const { name, location, tags, phoneNumber, hours, facebook, twitter, website } = currentCart;
 
     return (
       <div className="cart-info">
@@ -55,5 +56,17 @@ const CartInfo = (params) => {
   return null;
 }
 
-
 export default CartInfo;
+
+CartInfo.propTypes = {
+  currentCart: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    location: PropTypes.object.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    phoneNumber: PropTypes.string,
+    hours: PropTypes.object.isRequired,
+    facebook: PropTypes.string,
+    twitter: PropTypes.string,
+    website: PropTypes.string.isRequired,
+  }),
+}

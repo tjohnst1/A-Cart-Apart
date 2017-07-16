@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './infoPanel.scss';
 import CartInfo from './CartInfo';
 import FilterIcon from '../icons/FilterIcon';
@@ -22,3 +23,18 @@ const InfoPanel = (props) => {
 }
 
 export default InfoPanel;
+
+InfoPanel.propTypes = {
+  currentCart: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    location: PropTypes.object.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    phoneNumber: PropTypes.string,
+    hours: PropTypes.object.isRequired,
+    facebook: PropTypes.string,
+    twitter: PropTypes.string,
+    website: PropTypes.string.isRequired,
+  }),
+  handleToggleFilter: PropTypes.func.isRequired,
+  showFilter: PropTypes.bool.isRequired,
+}

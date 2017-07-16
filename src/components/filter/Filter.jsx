@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { kebabCase } from 'lodash';
 import { connect } from 'react-redux';
 import { filterMarkers } from '../../actions/map'
@@ -30,7 +31,6 @@ const Filter = (props) => {
     return null;
   }
 
-
 }
 
 function mapStateToProps(state) {
@@ -52,3 +52,14 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+
+Filter.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+  filter: PropTypes.arrayOf(PropTypes.string),
+  showFilter: PropTypes.bool.isRequired,
+  handleFilterMarkers: PropTypes.func.isRequired,
+}
+
+Filter.defaultValues = {
+  filter: [],
+}

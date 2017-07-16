@@ -34,6 +34,11 @@ const ZoomControl = (props) => {
 
 ZoomControl.propTypes = {
   type: PropTypes.string.isRequired,
+  mapReference: PropTypes.object,
+}
+
+ZoomControl.defaultValues = {
+  mapReference: null,
 }
 
 export default ZoomControl;

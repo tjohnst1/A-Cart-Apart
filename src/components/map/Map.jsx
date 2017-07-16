@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './map.scss';
 const $script =  require('scriptjs');
 import { mapConfig } from './mapConfig';
@@ -68,3 +69,17 @@ class Map extends Component {
 }
 
 export default Map;
+
+Map.PropTypes = {
+  cartData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  mapReference: PropTypes.object,
+  handleShowCartInfo: PropTypes.func.isRequired,
+  markerData: PropTypes.arrayOf(PropTypes.object),
+  showFilter: PropTypes.bool.isRequired,
+  handleToggleFilter: PropTypes.func.isRequired,
+}
+
+Map.defaultValues = {
+  mapReference: null,
+  markerData: [],
+}

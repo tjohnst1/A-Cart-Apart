@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Marker extends Component {
   addOnClick(props) {
@@ -23,4 +24,12 @@ export default class Marker extends Component {
   render() {
     return null;
   }
+}
+
+Marker.propTypes = {
+  mapReference: PropTypes.object.isRequired,
+  position: PropTypes.object.isRequired,
+  id: PropTypes.number.isRequired,
+  handleShowCartInfo: PropTypes.func.isRequired,
+  handleToggleFilter: PropTypes.func.isRequired,
 }
