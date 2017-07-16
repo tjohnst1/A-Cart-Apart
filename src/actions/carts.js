@@ -1,4 +1,6 @@
 import database from '../database/firebase';
+import { deselectCurrentMarker } from './map';
+import { isObject } from 'lodash';
 
 export const REQUEST_CART_DATA = 'REQUEST_CART_DATA';
 export const RECEIVE_CART_DATA = 'RECEIVE_CART_DATA';
@@ -42,9 +44,19 @@ function shouldFetchCartData(state) {
   return false;
 }
 
-export function showCartInfo(id) {
+function showCartInfo(id) {
   return {
     type: SHOW_CART_INFO,
     id
+  }
+}
+
+export function displaySelectedCartInfo(id) {
+  return function (dispatch, getState) {
+    const currentCart = getState().cartData.currentCart;
+    if (isObject(currentCart)) {
+      dispatch(deselectCurrentMarker())
+    }
+    dispatch(showCartInfo(id))
   }
 }

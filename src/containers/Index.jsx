@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Map from '../components/map/Map';
-import { getCartDataIfNeeded, showCartInfo } from '../actions/carts'
+import { getCartDataIfNeeded, displaySelectedCartInfo } from '../actions/carts'
 import { storeMapReference, initializeMarkers, toggleFilter } from '../actions/map'
 import InfoPanel from '../components/infoPanel/InfoPanel'
 
@@ -42,7 +42,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleShowCartInfo: (id) => {
-      dispatch(showCartInfo(id));
+      dispatch(displaySelectedCartInfo(id));
     },
     handleGetCartDataIfNeeded: () => {
       dispatch(getCartDataIfNeeded());
@@ -55,7 +55,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     handleToggleFilter: (bool) => {
       dispatch(toggleFilter(bool));
-      dispatch(showCartInfo(null));
     },
   }
 }

@@ -1,5 +1,5 @@
 import { intersection } from 'lodash';
-import { STORE_MAP_REFERENCE, STORE_MARKER_REFERENCES, FILTER_MARKERS, TOGGLE_FILTER } from '../actions/map'
+import { STORE_MAP_REFERENCE, STORE_MARKER_REFERENCES, FILTER_MARKERS, TOGGLE_FILTER, DESELECT_CURRENT_MARKER } from '../actions/map';
 
 const initialState = {
   mapReference: null,
@@ -29,6 +29,11 @@ export function mapReducer(state = initialState, action) {
         const markerReference = new google.maps.Marker({
           position,
           map: state.mapReference,
+          icon: {
+            url: 'img/blue-pin.png',
+            size: new google.maps.Size(26, 32),
+            optimized: false,
+          },
         });
         return {
           reference: markerReference,
@@ -41,7 +46,20 @@ export function mapReducer(state = initialState, action) {
         markers
       });
     }
-    case TOGGLE_FILTER:
+    case DESELECT_CURRENT_MARKER: {
+      const markers = state.markers.map((marker) => {
+        marker.reference.setIcon({
+          url: 'img/blue-pin.png',
+          size: new google.maps.Size(26, 32),
+          optimized: false,
+        })
+        return marker;
+      })
+      return Object.assign({}, state, {
+        markers
+      });
+    }
+    case TOGGLE_FILTER: {
       if (typeof action.value !== 'boolean') {
         return Object.assign({}, state, {
           showFilter: !state.showFilter,
@@ -50,6 +68,7 @@ export function mapReducer(state = initialState, action) {
       return Object.assign({}, state, {
         showFilter: action.value,
       });
+    }
     case FILTER_MARKERS: {
       const newFilter = updateFilters(action.tag, state.filter);
       const markers = state.markers.map(markerObj => {
