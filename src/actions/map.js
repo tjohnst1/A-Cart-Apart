@@ -8,32 +8,32 @@ export function storeMapReference(map) {
   return {
     type: STORE_MAP_REFERENCE,
     map,
-  }
+  };
 }
 
 export function initializeMarkers(cartData) {
   return {
     type: STORE_MARKER_REFERENCES,
     cartData,
-  }
+  };
 }
 
 export function filterMarkers(tag) {
   return {
     type: FILTER_MARKERS,
     tag,
-  }
+  };
 }
 
 export function toggleFilter(value) {
   return {
     type: TOGGLE_FILTER,
-    value
-  }
+    value,
+  };
 }
 
 export function deselectCurrentMarker() {
   return {
     type: DESELECT_CURRENT_MARKER,
-  }
+  };
 }

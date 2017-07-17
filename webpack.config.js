@@ -4,7 +4,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var DotenvPlugin = require('dotenv-webpack');
 
 var importEnv = new DotenvPlugin({
-  path: './config.env', // Path to .env file (this is the default)
+  path: path.resolve(__dirname, './config.env'), // Path to .env file (this is the default)
 })
 
 var extractHtml = new HtmlWebpackPlugin({
@@ -22,12 +22,12 @@ var extractStyles = new ExtractTextPlugin({
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: path.resolve('dist'),
+    path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js',
   },
   devServer: {
   inline: true,
-  contentBase: './dist',
+  contentBase: path.resolve(__dirname, './dist'),
   hot: true,
   historyApiFallback: true
   },
@@ -42,7 +42,7 @@ module.exports = {
       },
       {
         test: /\.jsx?$/,
-        loader: 'babel-loader',
+        loader: ['babel-loader', 'eslint-loader'],
         exclude: /node_modules/
       },
       {
@@ -66,5 +66,5 @@ module.exports = {
   plugins: [extractStyles, extractHtml, importEnv],
   resolve: {
     extensions: ['.js', '.jsx'],
-  }
+  },
 }

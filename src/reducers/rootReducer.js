@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'react-redux';
 import { cartReducer } from './cartReducer';
 import { mapReducer } from './mapReducer';
 

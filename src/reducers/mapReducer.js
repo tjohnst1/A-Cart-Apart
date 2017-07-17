@@ -6,25 +6,25 @@ const initialState = {
   markers: null,
   filter: [],
   showFilter: false,
-}
+};
 
 function updateFilters(newFilterItem, currentFilters) {
   const filterItemIndex = currentFilters.indexOf(newFilterItem);
   if (filterItemIndex === -1) {
-    return currentFilters.concat(newFilterItem)
+    return currentFilters.concat(newFilterItem);
   }
-  return currentFilters.slice(0,filterItemIndex).concat(currentFilters.slice(filterItemIndex + 1));
+  return currentFilters.slice(0, filterItemIndex).concat(currentFilters.slice(filterItemIndex + 1));
 }
 
-export function mapReducer(state = initialState, action) {
+export default function mapReducer(state = initialState, action) {
   switch (action.type) {
     case STORE_MAP_REFERENCE: {
       return Object.assign({}, state, {
         mapReference: action.map,
-      })
+      });
     }
     case STORE_MARKER_REFERENCES: {
-      const markers = action.cartData.map(cartInfo => {
+      const markers = action.cartData.map((cartInfo) => {
         const position = { lat: cartInfo.location.lat, lng: cartInfo.location.lng };
         const markerReference = new google.maps.Marker({
           position,
@@ -40,10 +40,10 @@ export function mapReducer(state = initialState, action) {
           position,
           id: cartInfo.id,
           tags: cartInfo.tags,
-        }
+        };
       });
       return Object.assign({}, state, {
-        markers
+        markers,
       });
     }
     case DESELECT_CURRENT_MARKER: {
@@ -52,18 +52,18 @@ export function mapReducer(state = initialState, action) {
           url: 'img/blue-pin.png',
           size: new google.maps.Size(26, 32),
           optimized: false,
-        })
+        });
         return marker;
-      })
+      });
       return Object.assign({}, state, {
-        markers
+        markers,
       });
     }
     case TOGGLE_FILTER: {
       if (typeof action.value !== 'boolean') {
         return Object.assign({}, state, {
           showFilter: !state.showFilter,
-        })
+        });
       }
       return Object.assign({}, state, {
         showFilter: action.value,
@@ -71,7 +71,7 @@ export function mapReducer(state = initialState, action) {
     }
     case FILTER_MARKERS: {
       const newFilter = updateFilters(action.tag, state.filter);
-      const markers = state.markers.map(markerObj => {
+      const markers = state.markers.map((markerObj) => {
         // show all if there are no filter items
         if (newFilter.length === 0) {
           markerObj.reference.setMap(state.mapReference);
@@ -84,11 +84,11 @@ export function mapReducer(state = initialState, action) {
           markerObj.reference.setMap(null);
         }
         return markerObj;
-      })
+      });
       return Object.assign({}, state, {
         filter: newFilter,
-        markers
-      })
+        markers,
+      });
     }
     default:
       return state;
