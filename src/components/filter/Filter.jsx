@@ -1,65 +1,59 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { kebabCase } from 'lodash';
+import { kebabCase, uniqueId } from 'lodash';
 import { connect } from 'react-redux';
-import { filterMarkers } from '../../actions/map'
+import classNames from 'classnames';
+import { filterMarkers } from '../../actions/map';
 import './filter.scss';
 
 const Filter = (props) => {
-  const { categories, filter, showFilter, handleFilterMarkers } = props;
+  const { categories, filter, handleFilterMarkers } = props;
+  const filterCheckboxes = categories.map((category) => {
+    const formattedName = kebabCase(category);
+    const checkboxClasses = classNames({
+      'control-indicator': true,
+      active: filter.indexOf(category) !== -1,
+    });
 
-  const filterCheckboxes = categories.map((category, i) => {
-    const formattedName = kebabCase(category)
     return (
-      <div className="filter__input-group" key={i}>
+      <div className="filter__input-group" key={uniqueId()}>
         <label htmlFor={kebabCase(formattedName)}>
-          <input id={formattedName} name={formattedName} type="checkbox" onChange={() => handleFilterMarkers(category)}/> {category}
-          <div className="control-indicator"></div>
+          <input id={formattedName} name={formattedName} type="checkbox" onChange={() => handleFilterMarkers(category)} /> {category}
+          <div className={checkboxClasses} />
         </label>
       </div>
-    )
-  })
-
-  if (showFilter){
-    return (
-      <div className="filter__container">
-        <h3 className="filter__headline">Categories</h3>
-        {filterCheckboxes}
-      </div>
     );
-  } else {
-    return null;
-  }
+  });
 
-}
+  return (
+    <div className="filter__container">
+      <h3 className="filter__headline">Categories</h3>
+      {filterCheckboxes}
+    </div>
+  );
+};
 
 function mapStateToProps(state) {
   const { categories } = state.cartData;
-  const { filter, showFilter } = state.map;
+  const { filter } = state.map;
   return {
     categories,
     filter,
-    showFilter,
-  }
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     handleFilterMarkers: (tag) => {
-      dispatch(filterMarkers(tag))
-    }
-  }
+      dispatch(filterMarkers(tag));
+    },
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);
 
 Filter.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.string).isRequired,
-  filter: PropTypes.arrayOf(PropTypes.string),
-  showFilter: PropTypes.bool.isRequired,
   handleFilterMarkers: PropTypes.func.isRequired,
-}
-
-Filter.defaultValues = {
-  filter: [],
-}
+  filter: PropTypes.arrayOf(PropTypes.string).isRequired,
+};

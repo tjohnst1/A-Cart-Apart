@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './cartInfo.scss'
+import './cartInfo.scss';
 
 const CartInfo = (params) => {
   const { currentCart } = params;
@@ -54,14 +54,18 @@ const CartInfo = (params) => {
   }
 
   return null;
-}
+};
 
 export default CartInfo;
 
 CartInfo.propTypes = {
   currentCart: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    location: PropTypes.object.isRequired,
+    location: PropTypes.shape({
+      address: PropTypes.string.isRequired,
+      lat: PropTypes.number.isRequired,
+      lng: PropTypes.number.isRequired,
+    }),
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
     phoneNumber: PropTypes.string,
     hours: PropTypes.object.isRequired,
@@ -69,4 +73,8 @@ CartInfo.propTypes = {
     twitter: PropTypes.string,
     website: PropTypes.string.isRequired,
   }),
-}
+};
+
+CartInfo.defaultProps = {
+  currentCart: null,
+};

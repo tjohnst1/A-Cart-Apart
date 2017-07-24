@@ -1,11 +1,11 @@
 import { intersection } from 'lodash';
-import { STORE_MAP_REFERENCE, STORE_MARKER_REFERENCES, FILTER_MARKERS, TOGGLE_FILTER, DESELECT_CURRENT_MARKER } from '../actions/map';
+import { STORE_MAP_REFERENCE, STORE_MARKER_REFERENCES, FILTER_MARKERS, SHOW_PANEL, DESELECT_CURRENT_MARKER } from '../actions/map';
 
 const initialState = {
   mapReference: null,
   markers: null,
   filter: [],
-  showFilter: false,
+  currentPanel: null,
 };
 
 function updateFilters(newFilterItem, currentFilters) {
@@ -26,6 +26,7 @@ export default function mapReducer(state = initialState, action) {
     case STORE_MARKER_REFERENCES: {
       const markers = action.cartData.map((cartInfo) => {
         const position = { lat: cartInfo.location.lat, lng: cartInfo.location.lng };
+        /* eslint-disable */
         const markerReference = new google.maps.Marker({
           position,
           map: state.mapReference,
@@ -35,6 +36,7 @@ export default function mapReducer(state = initialState, action) {
             optimized: false,
           },
         });
+        /* eslint-enable */
         return {
           reference: markerReference,
           position,
@@ -48,25 +50,23 @@ export default function mapReducer(state = initialState, action) {
     }
     case DESELECT_CURRENT_MARKER: {
       const markers = state.markers.map((marker) => {
+        /* eslint-disable */
         marker.reference.setIcon({
           url: 'img/blue-pin.png',
           size: new google.maps.Size(26, 32),
           optimized: false,
         });
+        /* eslint-enable */
         return marker;
       });
       return Object.assign({}, state, {
         markers,
       });
     }
-    case TOGGLE_FILTER: {
-      if (typeof action.value !== 'boolean') {
-        return Object.assign({}, state, {
-          showFilter: !state.showFilter,
-        });
-      }
+    case SHOW_PANEL: {
+      const panel = (action.panel !== state.currentPanel) ? action.panel : null;
       return Object.assign({}, state, {
-        showFilter: action.value,
+        currentPanel: panel,
       });
     }
     case FILTER_MARKERS: {

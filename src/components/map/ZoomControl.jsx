@@ -15,30 +15,29 @@ const ZoomControl = (props) => {
     } else {
       mapReference.setZoom(currentZoom - zoomConfig.increment);
     }
-  }
+  };
 
   if (type === 'increase') {
     return (
       <button className="zoom__btn increase" onClick={() => zoom()}>
         <ZoomInIcon />
       </button>
-    )
-  } else {
-    return (
-      <button className="zoom__btn decrease" onClick={() => zoom()}>
-        <ZoomOutIcon />
-      </button>
-    )
+    );
   }
-}
+  return (
+    <button className="zoom__btn decrease" onClick={() => zoom()}>
+      <ZoomOutIcon />
+    </button>
+  );
+};
 
 ZoomControl.propTypes = {
   type: PropTypes.string.isRequired,
   mapReference: PropTypes.object,
-}
+};
 
-ZoomControl.defaultValues = {
+ZoomControl.defaultProps = {
   mapReference: null,
-}
+};
 
 export default ZoomControl;

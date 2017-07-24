@@ -1,8 +1,8 @@
 export const STORE_MAP_REFERENCE = 'STORE_MAP_REFERENCE';
 export const STORE_MARKER_REFERENCES = 'STORE_MARKER_REFERENCES';
-export const TOGGLE_FILTER = 'TOGGLE_FILTER';
 export const FILTER_MARKERS = 'FILTER_MARKERS';
 export const DESELECT_CURRENT_MARKER = 'DESELECT_CURRENT_MARKER';
+export const SHOW_PANEL = 'SHOW_PANEL';
 
 export function storeMapReference(map) {
   return {
@@ -25,10 +25,10 @@ export function filterMarkers(tag) {
   };
 }
 
-export function toggleFilter(value) {
+export function showPanel(panel) {
   return {
-    type: TOGGLE_FILTER,
-    value,
+    type: SHOW_PANEL,
+    panel,
   };
 }
 

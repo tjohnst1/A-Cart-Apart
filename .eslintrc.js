@@ -1,14 +1,11 @@
 module.exports = {
-  "extends": "airbnb",
-  "plugins": [
-      "react",
-      "jsx-a11y",
-      "import"
-  ],
+  "extends": [ "airbnb" ],
+  "plugins": [ "react", "jsx-a11y", "import" ],
   "rules": {
     "import/no-named-as-default": "off",
-    "jsx-a11y/href-no-hash": "off",
-    "jsx-a11y/no-static-element-interactions": "off",
-    "max-len": "off"
+    "max-len": "off",
+    "no-extraneous-dependencies": "off",
+    "arrow-body-style": "off",
+    "react/forbid-prop-types": "off",
   }
-};
+}

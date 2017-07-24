@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Map from '../components/map/Map';
-import { getCartDataIfNeeded, displaySelectedCartInfo } from '../actions/carts'
-import { storeMapReference, initializeMarkers, toggleFilter } from '../actions/map'
-import InfoPanel from '../components/infoPanel/InfoPanel'
+import { getCartDataIfNeeded, displaySelectedCartInfo } from '../actions/carts';
+import { storeMapReference, initializeMarkers, showPanel } from '../actions/map';
+import InfoPanel from '../components/infoPanel/InfoPanel';
 
 class Index extends Component {
   componentWillMount() {
@@ -12,32 +13,40 @@ class Index extends Component {
 
   render() {
     const { cartData, currentCart, categories } = this.props.cartData;
-    const { mapReference, markers, showFilter } = this.props.map;
-    const { handleShowCartInfo, handleStoreMapReference, handleInitializeMarkers, handleToggleFilter } = this.props;
+    const { mapReference, markers } = this.props.map;
+    const { handleShowCartInfo, handleStoreMapReference, handleInitializeMarkers } = this.props;
 
     if (cartData) {
       return (
-        <div style={{width: '100%', height: '100%'}}>
+        <div style={{ width: '100%', height: '100%' }}>
           <main>
-            <InfoPanel currentCart={currentCart} handleToggleFilter={handleToggleFilter} showFilter={showFilter}/>
-            <Map mapReference={mapReference} cartData={cartData} currentCart={currentCart} handleShowCartInfo={handleShowCartInfo} categories={categories}
-              handleStoreMapReference={handleStoreMapReference} handleInitializeMarkers={handleInitializeMarkers} markerData={markers} handleToggleFilter={handleToggleFilter} />
+            <InfoPanel />
+            <Map
+              mapReference={mapReference}
+              cartData={cartData}
+              currentCart={currentCart}
+              handleShowCartInfo={handleShowCartInfo}
+              categories={categories}
+              handleStoreMapReference={handleStoreMapReference}
+              handleInitializeMarkers={handleInitializeMarkers}
+              markerData={markers}
+            />
           </main>
         </div>
-      )
-    } else {
-      return (<main>Loading...</main>)
+      );
     }
+
+    return <main>Loading...</main>;
   }
-};
+}
 
 const mapStateToProps = (state) => {
   const { cartData, map } = state;
   return {
     cartData,
-    map
-  }
-}
+    map,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -52,11 +61,25 @@ const mapDispatchToProps = (dispatch) => {
     },
     handleInitializeMarkers: (markers) => {
       dispatch(initializeMarkers(markers));
-    },
-    handleToggleFilter: (bool) => {
-      dispatch(toggleFilter(bool));
-    },
-  }
-}
+    }
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Index)
+export default connect(mapStateToProps, mapDispatchToProps)(Index);
+
+Index.propTypes = {
+  cartData: PropTypes.shape({
+    cartData: PropTypes.arrayOf(PropTypes.object),
+    categories: PropTypes.arrayOf(PropTypes.string),
+    currentCart: PropTypes.object,
+  }).isRequired,
+  map: PropTypes.shape({
+    mapReference: PropTypes.object,
+    markers: PropTypes.arrayOf(PropTypes.object),
+    filter: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
+  handleGetCartDataIfNeeded: PropTypes.func.isRequired,
+  handleShowCartInfo: PropTypes.func.isRequired,
+  handleStoreMapReference: PropTypes.func.isRequired,
+  handleInitializeMarkers: PropTypes.func.isRequired,
+};
