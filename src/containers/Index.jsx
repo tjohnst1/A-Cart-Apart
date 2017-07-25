@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Map from '../components/map/Map';
 import { getCartDataIfNeeded, displaySelectedCartInfo } from '../actions/carts';
-import { storeMapReference, initializeMarkers, showPanel } from '../actions/map';
+import { storeMapReference, initializeMarkers } from '../actions/map';
 import InfoPanel from '../components/infoPanel/InfoPanel';
 
 class Index extends Component {
@@ -61,7 +61,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     handleInitializeMarkers: (markers) => {
       dispatch(initializeMarkers(markers));
-    }
+    },
   };
 };
 

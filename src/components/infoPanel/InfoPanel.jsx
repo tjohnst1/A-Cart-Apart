@@ -16,6 +16,7 @@ const InfoPanel = (props) => {
         <h1>A Cart Apart</h1>
         <button onClick={() => handleShowPanel('filter')}><FilterIcon /><span>Filter</span></button>
       </div>
+      <input className="search" type="text" placeholder="Search" />
       <div className="info-panel__details">
         { currentPanel === 'filter' ? <Filter /> : <CartInfo currentCart={currentCart} /> }
       </div>
