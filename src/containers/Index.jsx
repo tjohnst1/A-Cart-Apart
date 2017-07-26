@@ -12,7 +12,7 @@ class Index extends Component {
   }
 
   render() {
-    const { cartData, currentCart, categories } = this.props.cartData;
+    const { cartData, currentCart, tags } = this.props.cartData;
     const { mapReference, markers } = this.props.map;
     const { handleShowCartInfo, handleStoreMapReference, handleInitializeMarkers } = this.props;
 
@@ -26,7 +26,7 @@ class Index extends Component {
               cartData={cartData}
               currentCart={currentCart}
               handleShowCartInfo={handleShowCartInfo}
-              categories={categories}
+              tags={tags}
               handleStoreMapReference={handleStoreMapReference}
               handleInitializeMarkers={handleInitializeMarkers}
               markerData={markers}
@@ -70,7 +70,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Index);
 Index.propTypes = {
   cartData: PropTypes.shape({
     cartData: PropTypes.arrayOf(PropTypes.object),
-    categories: PropTypes.arrayOf(PropTypes.string),
+    tags: PropTypes.arrayOf(PropTypes.string),
     currentCart: PropTypes.object,
   }).isRequired,
   map: PropTypes.shape({

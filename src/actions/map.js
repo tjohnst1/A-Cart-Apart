@@ -18,10 +18,11 @@ export function initializeMarkers(cartData) {
   };
 }
 
-export function filterMarkers(tag) {
+export function filterMarkers(phrase, category = null) {
   return {
     type: FILTER_MARKERS,
-    tag,
+    phrase,
+    category,
   };
 }
 

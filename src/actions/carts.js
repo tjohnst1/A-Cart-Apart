@@ -1,5 +1,5 @@
 import { isObject } from 'lodash';
-import { deselectCurrentMarker } from './map';
+import { deselectCurrentMarker, showPanel, filterMarkers } from './map';
 import database from '../database/firebase';
 
 export const REQUEST_CART_DATA = 'REQUEST_CART_DATA';
@@ -53,10 +53,24 @@ function showCartInfo(id) {
 
 export function displaySelectedCartInfo(id) {
   return (dispatch, getState) => {
-    const currentCart = getState().cartData.currentCart;
+    const { currentCart } = getState().cartData;
+    const { currentPanel } = getState().map;
     if (isObject(currentCart)) {
       dispatch(deselectCurrentMarker());
     }
+    if (currentPanel !== 'cart info') {
+      dispatch(showPanel('cart info'));
+    }
     dispatch(showCartInfo(id));
+  };
+}
+
+export function findCart(phrase) {
+  return (dispatch, getState) => {
+    const { currentPanel } = getState().map;
+    if (currentPanel !== 'search') {
+      dispatch(showPanel('search'));
+    }
+    dispatch(filterMarkers(phrase));
   };
 }

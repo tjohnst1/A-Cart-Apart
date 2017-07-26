@@ -42,6 +42,7 @@ export default function mapReducer(state = initialState, action) {
           position,
           id: cartInfo.id,
           tags: cartInfo.tags,
+          name: cartInfo.name,
         };
       });
       return Object.assign({}, state, {
@@ -64,25 +65,30 @@ export default function mapReducer(state = initialState, action) {
       });
     }
     case SHOW_PANEL: {
-      const panel = (action.panel !== state.currentPanel) ? action.panel : null;
+      // set the panel, but don't do anything if it is currently selected
+      const currentPanel = action.panel !== state.panel ? action.panel : null;
       return Object.assign({}, state, {
-        currentPanel: panel,
+        currentPanel,
       });
     }
     case FILTER_MARKERS: {
-      const newFilter = updateFilters(action.tag, state.filter);
+      const { phrase } = action;
+      const newFilter = updateFilters(phrase, state.filter);
       const markers = state.markers.map((markerObj) => {
-        // show all if there are no filter items
+        // if there are no filter items, show everything
         if (newFilter.length === 0) {
           markerObj.reference.setMap(state.mapReference);
           return markerObj;
         }
 
-        if (intersection(markerObj.tags, newFilter).length > 0) {
+        const re = new RegExp(phrase, 'gi');
+
+        if (re.test(markerObj.tags) || re.test(markerObj.name)) {
           markerObj.reference.setMap(state.mapReference);
         } else {
           markerObj.reference.setMap(null);
         }
+
         return markerObj;
       });
       return Object.assign({}, state, {

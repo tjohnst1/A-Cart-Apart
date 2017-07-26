@@ -4,17 +4,17 @@ import { SHOW_CART_INFO, RECEIVE_CART_DATA } from '../actions/carts';
 const initialState = {
   cartData: [],
   currentCart: null,
-  categories: [],
+  tags: [],
 };
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case RECEIVE_CART_DATA: {
-      let categories = action.cartData.map(cartInfo => cartInfo.tags);
-      categories = uniq(flattenDeep(categories));
+      let tags = action.cartData.map(cartInfo => cartInfo.tags);
+      tags = uniq(flattenDeep(tags));
       return Object.assign({}, state, {
         cartData: action.cartData,
-        categories,
+        tags,
       });
     }
     case SHOW_CART_INFO: {

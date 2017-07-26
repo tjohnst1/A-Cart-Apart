@@ -3,12 +3,27 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './infoPanel.scss';
 import { showPanel } from '../../actions/map';
+import { findCart } from '../../actions/carts';
 import CartInfo from './CartInfo';
+import SearchResults from './SearchResults';
 import FilterIcon from '../icons/FilterIcon';
 import Filter from '../filter/Filter';
 
 const InfoPanel = (props) => {
-  const { currentCart, handleShowPanel, currentPanel } = props;
+  const { currentCart, handleShowPanel, handleFindCart, currentPanel } = props;
+
+  function generatePanel(panel) {
+    switch (panel) {
+      case 'filter':
+        return <Filter />;
+      case 'cart info':
+        return <CartInfo currentCart={currentCart} />;
+      case 'search':
+        return <SearchResults />;
+      default:
+        return null;
+    }
+  }
 
   return (
     <div className="info-panel">
@@ -16,9 +31,9 @@ const InfoPanel = (props) => {
         <h1>A Cart Apart</h1>
         <button onClick={() => handleShowPanel('filter')}><FilterIcon /><span>Filter</span></button>
       </div>
-      <input className="search" type="text" placeholder="Search" />
+      <input className="search" type="text" placeholder="Search" onChange={e => handleFindCart(e.target.value)} />
       <div className="info-panel__details">
-        { currentPanel === 'filter' ? <Filter /> : <CartInfo currentCart={currentCart} /> }
+        { generatePanel(currentPanel) }
       </div>
     </div>
   );
@@ -35,6 +50,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleShowPanel: (panel) => {
       dispatch(showPanel(panel));
+    },
+    handleFindCart: (phrase) => {
+      dispatch(findCart(phrase));
     },
   };
 };
@@ -55,6 +73,7 @@ InfoPanel.propTypes = {
     website: PropTypes.string.isRequired,
   }),
   handleShowPanel: PropTypes.func.isRequired,
+  handleFindCart: PropTypes.func.isRequired,
   currentPanel: PropTypes.string,
 };
 
