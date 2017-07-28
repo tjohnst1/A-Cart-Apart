@@ -1,4 +1,3 @@
-import { intersection } from 'lodash';
 import { STORE_MAP_REFERENCE, STORE_MARKER_REFERENCES, FILTER_MARKERS, SHOW_PANEL, DESELECT_CURRENT_MARKER } from '../actions/map';
 
 const initialState = {
