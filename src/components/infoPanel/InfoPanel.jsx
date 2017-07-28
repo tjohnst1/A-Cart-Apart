@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
 import './infoPanel.scss';
 import { showPanel } from '../../actions/map';
 import { findCart } from '../../actions/carts';
@@ -11,6 +12,10 @@ import Filter from '../filter/Filter';
 
 const InfoPanel = (props) => {
   const { currentCart, handleShowPanel, handleFindCart, currentPanel } = props;
+  const searchClasses = classNames({
+    search: true,
+    bb: currentPanel !== null,
+  });
 
   function generatePanel(panel) {
     switch (panel) {
@@ -31,7 +36,7 @@ const InfoPanel = (props) => {
         <h1>A Cart Apart</h1>
         <button onClick={() => handleShowPanel('filter')}><FilterIcon /><span>Filter</span></button>
       </div>
-      <input className="search" type="text" placeholder="Search" onChange={e => handleFindCart(e.target.value)} />
+      <input className={searchClasses} type="text" placeholder="Search" onChange={e => handleFindCart(e.target.value)} />
       <div className="info-panel__details">
         { generatePanel(currentPanel) }
       </div>
