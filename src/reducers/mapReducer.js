@@ -65,7 +65,7 @@ export default function mapReducer(state = initialState, action) {
     }
     case SHOW_PANEL: {
       // set the panel, but don't do anything if it is currently selected
-      const currentPanel = action.panel !== state.panel ? action.panel : null;
+      const currentPanel = action.panel !== state.currentPanel ? action.panel : null;
       return Object.assign({}, state, {
         currentPanel,
       });
