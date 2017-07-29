@@ -9,11 +9,6 @@ export default class Marker extends Component {
       const markerReference = props.reference;
       markerReference.addListener('click', () => {
         handleShowCartInfo(id);
-        markerReference.setIcon({
-          url: 'img/orange-pin.png',
-          size: new google.maps.Size(26, 32), // eslint-disable-line no-undef
-          optimized: false,
-        });
         mapReference.panTo(position);
       });
     };

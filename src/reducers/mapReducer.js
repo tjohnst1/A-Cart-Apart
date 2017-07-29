@@ -1,4 +1,4 @@
-import { STORE_MAP_REFERENCE, STORE_MARKER_REFERENCES, FILTER_MARKERS, SHOW_PANEL, DESELECT_CURRENT_MARKER } from '../actions/map';
+import { STORE_MAP_REFERENCE, STORE_MARKER_REFERENCES, FILTER_MARKERS, SHOW_PANEL, DESELECT_CURRENT_MARKER, SELECT_MARKER } from '../actions/map';
 
 const initialState = {
   mapReference: null,
@@ -48,8 +48,25 @@ export default function mapReducer(state = initialState, action) {
         markers,
       });
     }
+    case SELECT_MARKER: {
+      state.markers.map((marker) => {
+        if (marker.id === action.id) {
+          /* eslint-disable */
+          marker.reference.setIcon({
+            url: 'img/orange-pin.png',
+            size: new google.maps.Size(26, 32),
+            optimized: false,
+          });
+          /* eslint-enable */
+        }
+        return marker;
+      });
+      return Object.assign({}, state, {
+        state,
+      });
+    }
     case DESELECT_CURRENT_MARKER: {
-      const markers = state.markers.map((marker) => {
+      state.markers.forEach((marker) => {
         /* eslint-disable */
         marker.reference.setIcon({
           url: 'img/blue-pin.png',
@@ -60,7 +77,7 @@ export default function mapReducer(state = initialState, action) {
         return marker;
       });
       return Object.assign({}, state, {
-        markers,
+        state,
       });
     }
     case SHOW_PANEL: {

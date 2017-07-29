@@ -3,6 +3,7 @@ export const STORE_MARKER_REFERENCES = 'STORE_MARKER_REFERENCES';
 export const FILTER_MARKERS = 'FILTER_MARKERS';
 export const DESELECT_CURRENT_MARKER = 'DESELECT_CURRENT_MARKER';
 export const SHOW_PANEL = 'SHOW_PANEL';
+export const SELECT_MARKER = 'SELECT_MARKER';
 
 export function storeMapReference(map) {
   return {
@@ -36,5 +37,12 @@ export function showPanel(panel) {
 export function deselectCurrentMarker() {
   return {
     type: DESELECT_CURRENT_MARKER,
+  };
+}
+
+export function selectMarker(id) {
+  return {
+    type: SELECT_MARKER,
+    id,
   };
 }
