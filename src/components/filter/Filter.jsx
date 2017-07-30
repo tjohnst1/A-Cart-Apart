@@ -12,7 +12,7 @@ const Filter = (props) => {
     const formattedName = kebabCase(tag);
     const checkboxClasses = classNames({
       'control-indicator': true,
-      active: filter.searchTerms.indexOf(tag) !== -1,
+      active: filter.matches.tags.indexOf(tag) !== -1,
     });
 
     return (

@@ -1,10 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,600,800');
 
 html {
+  font-family: 'Montserrat', sans-serif;
   box-sizing: border-box;
+  color: #333333;
+  font-size: 10px;
 }
 *, *:before, *:after {
   box-sizing: inherit;
+}
+
+button {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
 }
 
 html, body, #root, main {
@@ -14,11 +22,10 @@ html, body, #root, main {
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
   min-height: 100%;
-  color: #333333;
-  font-size: 10px;
 }
+
+body *
 
 main {
   display: block;

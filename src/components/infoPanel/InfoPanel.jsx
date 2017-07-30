@@ -11,7 +11,7 @@ import FilterIcon from '../icons/FilterIcon';
 import Filter from '../filter/Filter';
 
 const InfoPanel = (props) => {
-  const { currentCart, handleShowPanel, handleFindCart, currentPanel } = props;
+  const { currentCart, handleShowPanel, handleFindCart, currentPanel, filter } = props;
   const searchClasses = classNames({
     search: true,
     bb: currentPanel !== null,
@@ -24,7 +24,7 @@ const InfoPanel = (props) => {
       case 'cart info':
         return <CartInfo currentCart={currentCart} />;
       case 'search':
-        return <SearchResults />;
+        return <SearchResults filter={filter} />;
       default:
         return null;
     }
@@ -48,6 +48,7 @@ const mapStateToProps = (state) => {
   return {
     currentCart: state.cartData.currentCart,
     currentPanel: state.map.currentPanel,
+    filter: state.map.filter,
   };
 };
 
@@ -80,6 +81,13 @@ InfoPanel.propTypes = {
   handleShowPanel: PropTypes.func.isRequired,
   handleFindCart: PropTypes.func.isRequired,
   currentPanel: PropTypes.string,
+  filter: PropTypes.shape({
+    matches: PropTypes.shape({
+      names: PropTypes.arrayOf(PropTypes.string),
+      tags: PropTypes.arrayOf(PropTypes.string),
+    }),
+    searchTerms: PropTypes.string,
+  }).isRequired,
 };
 
 InfoPanel.defaultProps = {

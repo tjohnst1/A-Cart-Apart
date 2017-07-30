@@ -1,0 +1,36 @@
+.search-results {
+  padding: 1em 2em;
+  button {
+    color: $dark-grey;
+    margin-top: .5em;
+    font-size: 1.4em;
+    cursor: pointer;
+    border: 0;
+    display: block;
+    background: none;
+    font-weight: 400;
+  }
+  .highlight {
+    color: $red;
+  }
+}
+
+.search-results__group {
+  padding: 0 0 1em 0;
+}
+
+.search-results__subheadding {
+  margin: 0 0 0.5em 0;
+  padding: .5em 0;
+  width: 100%;
+  border-bottom: 1px solid $light-grey;
+  color: darken($light-grey, 30%);
+  font-weight: 300;
+  font-size: 1.4em;
+}
+
+.search-results__no-results {
+  font-size: 1.4em;
+  color: $medium-grey;
+  margin: 0;
+}

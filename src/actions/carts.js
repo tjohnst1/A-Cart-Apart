@@ -80,6 +80,9 @@ export function findCart(phrase) {
     if (currentPanel !== 'search') {
       dispatch(showPanel('search'));
     }
+    if (phrase === '') {
+      dispatch(showPanel(null));
+    }
     dispatch(filterMarkers(phrase, 'search'));
   };
 }
