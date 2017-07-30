@@ -1,18 +1,89 @@
+import { intersection } from 'lodash';
 import { STORE_MAP_REFERENCE, STORE_MARKER_REFERENCES, FILTER_MARKERS, SHOW_PANEL, DESELECT_CURRENT_MARKER, SELECT_MARKER } from '../actions/map';
 
 const initialState = {
   mapReference: null,
   markers: null,
-  filter: [],
+  filter: {
+    searchTerms: '',
+    matches: {
+      tags: [],
+      names: [],
+    },
+  },
   currentPanel: null,
 };
 
-function updateFilters(newFilterItem, currentFilters) {
-  const filterItemIndex = currentFilters.indexOf(newFilterItem);
-  if (filterItemIndex === -1) {
-    return currentFilters.concat(newFilterItem);
+function updateMarkers(mapReference, markers, filter, filterType) {
+  switch (filterType) {
+    case 'search': {
+      // if there are no search terms, show all the markers
+      if (filter.seachTerms === '') {
+        return markers.map((marker) => {
+          marker.reference.setMap(mapReference);
+          return marker;
+        });
+      }
+
+      const re = new RegExp(filter.searchTerms, 'gi');
+      return markers.map((marker) => {
+        // check to see if the marker name or tags at least partially match the search terms
+        if (re.test(marker.name) || re.test(marker.tags.join(''))) {
+          marker.reference.setMap(mapReference);
+        } else {
+          marker.reference.setMap(null);
+        }
+
+        return marker;
+      });
+    }
+    case 'tags': {
+      // if there are no search tags, show all the markers
+      if (filter.matches.tags.length === 0) {
+        return markers.map((marker) => {
+          marker.reference.setMap(mapReference);
+          return marker;
+        });
+      }
+
+      return markers.map((marker) => {
+        // check if the marker has some of the tags we are looking for
+        if (intersection(marker.tags, filter.matches.tags).length > 0) {
+          marker.reference.setMap(mapReference);
+        } else {
+          marker.reference.setMap(null);
+        }
+        return marker;
+      });
+    }
+    default:
+      return markers;
   }
-  return currentFilters.slice(0, filterItemIndex).concat(currentFilters.slice(filterItemIndex + 1));
+}
+
+function updateMatches(markers, searchTerms) {
+  const newMatches = {
+    names: [],
+    tags: [],
+  };
+
+  const re = new RegExp(searchTerms, 'gi');
+
+  markers.forEach((marker) => {
+    // push up the matched tags
+    marker.tags.forEach((tag) => {
+      if (re.test(tag) && (newMatches.tags.indexOf(tag) === -1)) {
+        newMatches.tags.push(tag);
+      }
+    });
+
+    // push up the matched names
+    if (re.test(marker.name)) {
+      newMatches.names.push(marker.name);
+    }
+  });
+
+  return newMatches;
 }
 
 export default function mapReducer(state = initialState, action) {
@@ -88,30 +159,51 @@ export default function mapReducer(state = initialState, action) {
       });
     }
     case FILTER_MARKERS: {
-      const { phrase } = action;
-      const newFilter = updateFilters(phrase, state.filter);
-      const markers = state.markers.map((markerObj) => {
-        // if there are no filter items, show everything
-        if (newFilter.length === 0) {
-          markerObj.reference.setMap(state.mapReference);
-          return markerObj;
-        }
+      const { phrase, filterType } = action;
+      const { matches } = state.filter;
+      const { markers, mapReference } = state;
+      const newFilter = {
+        matches: {
+          tags: [],
+          names: [],
+        },
+        searchTerms: '',
+      };
 
-        const re = new RegExp(phrase, 'gi');
+      let newMarkers = [];
 
-        if (re.test(markerObj.tags) || re.test(markerObj.name)) {
-          markerObj.reference.setMap(state.mapReference);
-        } else {
-          markerObj.reference.setMap(null);
-        }
+      switch (filterType) {
+        case 'search':
+          newFilter.searchTerms = phrase;
+          newFilter.matches = updateMatches(markers, phrase);
+          newMarkers = updateMarkers(mapReference, markers, newFilter, filterType);
+          break;
+        case 'tags':
+          // check if there are already tags being searched for
+          if (matches.tags.length > 0) {
+            // remove the search term if it was present in the previous state
+            if (matches.tags.indexOf(phrase) !== -1) {
+              newFilter.matches.tags = matches.tags.filter(tag => tag !== phrase);
+            } else {
+            // otherwise, add the new search term to the filter
+              newFilter.matches.tags = matches.tags.concat(phrase);
+            }
+          } else {
+            // assign the tags if there weren't any declaired in the previous state
+            newFilter.matches.tags = [phrase];
+          }
+          newMarkers = updateMarkers(mapReference, markers, newFilter, filterType);
+          break;
+        default:
+          newMarkers = markers;
+      }
 
-        return markerObj;
-      });
       return Object.assign({}, state, {
         filter: newFilter,
-        markers,
+        markers: newMarkers,
       });
     }
+
     default:
       return state;
   }

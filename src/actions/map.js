@@ -19,11 +19,11 @@ export function initializeMarkers(cartData) {
   };
 }
 
-export function filterMarkers(phrase, category = null) {
+export function filterMarkers(phrase, filterType = null) {
   return {
     type: FILTER_MARKERS,
     phrase,
-    category,
+    filterType,
   };
 }
 

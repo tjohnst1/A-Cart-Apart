@@ -76,7 +76,13 @@ Index.propTypes = {
   map: PropTypes.shape({
     mapReference: PropTypes.object,
     markers: PropTypes.arrayOf(PropTypes.object),
-    filter: PropTypes.arrayOf(PropTypes.string),
+    filter: PropTypes.shape({
+      matches: PropTypes.shape({
+        tags: PropTypes.arrayOf(PropTypes.string),
+        names: PropTypes.arrayOf(PropTypes.string),
+      }),
+      cartData: PropTypes.arrayOf(PropTypes.string),
+    }),
   }).isRequired,
   handleGetCartDataIfNeeded: PropTypes.func.isRequired,
   handleShowCartInfo: PropTypes.func.isRequired,

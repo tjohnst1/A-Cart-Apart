@@ -12,7 +12,7 @@ const Filter = (props) => {
     const formattedName = kebabCase(tag);
     const checkboxClasses = classNames({
       'control-indicator': true,
-      active: filter.indexOf(tag) !== -1,
+      active: filter.searchTerms.indexOf(tag) !== -1,
     });
 
     return (
@@ -55,5 +55,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(Filter);
 Filter.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   handleFilterMarkers: PropTypes.func.isRequired,
-  filter: PropTypes.arrayOf(PropTypes.string).isRequired,
+  filter: PropTypes.shape({
+    matches: PropTypes.shape({
+      tags: PropTypes.arrayOf(PropTypes.string),
+      names: PropTypes.arrayOf(PropTypes.string),
+    }),
+    cartData: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
 };
