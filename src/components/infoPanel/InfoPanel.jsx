@@ -4,14 +4,15 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import './infoPanel.scss';
 import { showPanel } from '../../actions/map';
-import { findCart } from '../../actions/carts';
+import { findCart, displaySelectedCartInfo } from '../../actions/carts';
 import CartInfo from './CartInfo';
 import SearchResults from './SearchResults';
 import FilterIcon from '../icons/FilterIcon';
 import Filter from '../filter/Filter';
 
+
 const InfoPanel = (props) => {
-  const { currentCart, handleShowPanel, handleFindCart, currentPanel, filter } = props;
+  const { currentCart, handleShowPanel, handleFindCart, currentPanel } = props;
   const searchClasses = classNames({
     search: true,
     bb: currentPanel !== null,
@@ -24,7 +25,7 @@ const InfoPanel = (props) => {
       case 'cart info':
         return <CartInfo currentCart={currentCart} />;
       case 'search':
-        return <SearchResults filter={filter} />;
+        return <SearchResults />;
       default:
         return null;
     }
@@ -60,6 +61,9 @@ const mapDispatchToProps = (dispatch) => {
     handleFindCart: (phrase) => {
       dispatch(findCart(phrase));
     },
+    handleShowCartInfo: (id) => {
+      dispatch(displaySelectedCartInfo(id));
+    },
   };
 };
 
@@ -81,13 +85,6 @@ InfoPanel.propTypes = {
   handleShowPanel: PropTypes.func.isRequired,
   handleFindCart: PropTypes.func.isRequired,
   currentPanel: PropTypes.string,
-  filter: PropTypes.shape({
-    matches: PropTypes.shape({
-      names: PropTypes.arrayOf(PropTypes.string),
-      tags: PropTypes.arrayOf(PropTypes.string),
-    }),
-    searchTerms: PropTypes.string,
-  }).isRequired,
 };
 
 InfoPanel.defaultProps = {

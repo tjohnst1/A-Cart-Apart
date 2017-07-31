@@ -8,7 +8,7 @@ const initialState = {
     searchTerms: '',
     matches: {
       tags: [],
-      names: [],
+      carts: [],
     },
   },
   currentPanel: null,
@@ -63,9 +63,14 @@ function updateMarkers(mapReference, markers, filter, filterType) {
 
 function updateMatches(markers, searchTerms) {
   const newMatches = {
-    names: [],
+    carts: [],
     tags: [],
   };
+
+  // clear out all of the matches if 'searchTerms' is a blank string
+  if (searchTerms === '') {
+    return newMatches;
+  }
 
   const re = new RegExp(searchTerms, 'gi');
 
@@ -77,9 +82,12 @@ function updateMatches(markers, searchTerms) {
       }
     });
 
-    // push up the matched names
+    // push up the matched carts
     if (re.test(marker.name)) {
-      newMatches.names.push(marker.name);
+      newMatches.carts.push({
+        name: marker.name,
+        id: marker.id,
+      });
     }
   });
 
@@ -165,7 +173,7 @@ export default function mapReducer(state = initialState, action) {
       const newFilter = {
         matches: {
           tags: [],
-          names: [],
+          carts: [],
         },
         searchTerms: '',
       };
