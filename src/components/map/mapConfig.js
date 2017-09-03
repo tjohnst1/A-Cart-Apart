@@ -184,6 +184,7 @@ export const mapConfig = {
   scaleControl: false,
   streetViewControl: false,
   zoomControl: false,
+  fullscreenControl: false,
 };
 
 export const zoomConfig = {

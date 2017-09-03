@@ -80,7 +80,7 @@ InfoPanel.propTypes = {
     hours: PropTypes.object.isRequired,
     facebook: PropTypes.string,
     twitter: PropTypes.string,
-    website: PropTypes.string.isRequired,
+    website: PropTypes.string,
   }),
   handleShowPanel: PropTypes.func.isRequired,
   handleFindCart: PropTypes.func.isRequired,

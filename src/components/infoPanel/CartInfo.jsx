@@ -12,40 +12,40 @@ const CartInfo = (params) => {
       <div className="cart-info">
         <h2 className="cart-info__headline">{name}</h2>
         <p className="cart-info__secondary">{location.address}</p>
-        <p className="cart-info__body-text"><i>Tags:</i> {tags}</p>
-        {phoneNumber !== 'Not Provided' ? <p className="cart-info__body-text"><i>Phone Number:</i> <a href={phoneNumber}>{phoneNumber}</a></p> : null}
-        {facebook !== 'Not Provided' ? <p className="cart-info__body-text"><i>Facebook:</i> <a href={facebook}>{facebook}</a></p> : null}
-        {twitter !== 'Not Provided' ? <p className="cart-info__body-text"><i>Twitter:</i> <a href={twitter}>{twitter}</a></p> : null}
-        {website !== 'Not Provided' ? <p className="cart-info__body-text"><i>Website:</i> <a href={website}>{website}</a></p> : null}
+        <p className="cart-info__body-text"><i>Tags:</i> {tags.join(', ')}</p>
+        {phoneNumber ? <p className="cart-info__body-text"><i>Phone Number:</i> <a href={phoneNumber}>{phoneNumber}</a></p> : null}
+        {facebook ? <p className="cart-info__body-text"><i>Facebook:</i> <a href={facebook}>{facebook}</a></p> : null}
+        {twitter ? <p className="cart-info__body-text"><i>Twitter:</i> <a href={twitter}>{twitter}</a></p> : null}
+        {website ? <p className="cart-info__body-text"><i>Website:</i> <a href={website}>{website}</a></p> : null}
         <table className="cart-info__hours">
           <tbody>
             <tr>
               <td>Monday:</td>
-              <td>{hours.monday}</td>
+              <td>{hours.monday || 'Closed'}</td>
             </tr>
             <tr>
               <td>Tuesday:</td>
-              <td>{hours.tuesday}</td>
+              <td>{hours.tuesday || 'Closed'}</td>
             </tr>
             <tr>
               <td>Wednesday:</td>
-              <td>{hours.wednesday}</td>
+              <td>{hours.wednesday || 'Closed'}</td>
             </tr>
             <tr>
               <td>Thursday:</td>
-              <td>{hours.thursday}</td>
+              <td>{hours.thursday || 'Closed'}</td>
             </tr>
             <tr>
               <td>Friday:</td>
-              <td>{hours.friday}</td>
+              <td>{hours.friday || 'Closed'}</td>
             </tr>
             <tr>
               <td>Saturday:</td>
-              <td>{hours.saturday}</td>
+              <td>{hours.saturday || 'Closed'}</td>
             </tr>
             <tr>
               <td>Sunday:</td>
-              <td>{hours.sunday}</td>
+              <td>{hours.sunday || 'Closed' }</td>
             </tr>
           </tbody>
         </table>
