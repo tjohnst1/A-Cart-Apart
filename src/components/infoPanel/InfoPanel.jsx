@@ -19,9 +19,9 @@ const InfoPanel = (props) => {
   });
   const infoPanelClasses = classNames({
     'info-panel': true,
-    'filter': currentPanel === 'filter',
-    'cart info': currentPanel === 'cart-info',
-    'search': currentPanel === 'search',
+    'filter-panel': currentPanel === 'filter',
+    'cart-info-panel': currentPanel === 'cart info',
+    'search-panel': currentPanel === 'search',
   })
 
   function generatePanel(panel) {
