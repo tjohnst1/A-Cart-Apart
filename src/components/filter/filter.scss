@@ -20,7 +20,7 @@
   display: inherit;
   margin-top: 10px;
   font-size: 1.4em;
-  flex: 0 0 33%;
+  flex: 0 0 50%;
   position: relative;
   input {
     z-index: -1;
@@ -41,9 +41,9 @@
       }
     }
   }
-  &:nth-child(-n+4) {
-    margin-top: 0;
-  }
+  // &:nth-child(-n+4) {
+  //   margin-top: 0;
+  // }
   .control-indicator {
     position: absolute;
     width: 20px;

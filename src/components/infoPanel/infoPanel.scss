@@ -9,6 +9,7 @@
   box-shadow: none;
   height: 60%;
   max-height: none;
+  overflow: hidden;
 }
 
 @media only screen and (min-width: 768px) {
@@ -19,6 +20,9 @@
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.17);
     height: auto;
     max-height: 90%;
+    &.filter {
+      height: 90%;
+    }
   }
 }
 
@@ -72,7 +76,7 @@
 }
 
 .info-panel__details {
-  height: calc(100% - 60px);
+  height: calc(100% - 100px);
   overflow-y: auto;
 }
 

@@ -17,6 +17,12 @@ const InfoPanel = (props) => {
     search: true,
     bb: currentPanel !== null,
   });
+  const infoPanelClasses = classNames({
+    'info-panel': true,
+    'filter': currentPanel === 'filter',
+    'cart info': currentPanel === 'cart-info',
+    'search': currentPanel === 'search',
+  })
 
   function generatePanel(panel) {
     switch (panel) {
@@ -32,7 +38,7 @@ const InfoPanel = (props) => {
   }
 
   return (
-    <div className="info-panel">
+    <div className={infoPanelClasses}>
       <div className="info-panel__headline">
         <h1>A Cart Apart</h1>
         <button onClick={() => handleShowPanel('filter')}><FilterIcon /><span>Filter</span></button>

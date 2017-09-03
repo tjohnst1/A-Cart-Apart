@@ -8,7 +8,7 @@ import './filter.scss';
 
 const Filter = (props) => {
   const { tags, filter, handleFilterMarkers } = props;
-  const filterCheckboxes = tags.map((tag) => {
+  const filterCheckboxes = tags.sort().map((tag) => {
     const formattedName = kebabCase(tag);
     const checkboxClasses = classNames({
       'control-indicator': true,
