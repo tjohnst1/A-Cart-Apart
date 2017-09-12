@@ -6,7 +6,7 @@ import { getCartDataIfNeeded, displaySelectedCartInfo } from '../actions/carts';
 import { storeMapReference, initializeMarkers } from '../actions/map';
 import InfoPanel from '../components/infoPanel/InfoPanel';
 
-class Index extends Component {
+export class Index extends Component {
   componentWillMount() {
     this.props.handleGetCartDataIfNeeded();
   }

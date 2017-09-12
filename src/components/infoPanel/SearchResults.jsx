@@ -7,7 +7,7 @@ import { displaySelectedCartInfo } from '../../actions/carts';
 import { filterMarkers } from '../../actions/map';
 import './searchresults.scss';
 
-const SearchResults = (props) => {
+export const SearchResults = (props) => {
   const { handleShowCartInfo, handleFilterMarkers } = props;
   const { searchTerms } = props.filter;
   const { carts, tags } = props.filter.matches;

@@ -11,18 +11,19 @@ import FilterIcon from '../icons/FilterIcon';
 import Filter from '../filter/Filter';
 
 
-const InfoPanel = (props) => {
+export const InfoPanel = (props) => {
   const { currentCart, handleShowPanel, handleFindCart, currentPanel } = props;
   const searchClasses = classNames({
     search: true,
     bb: currentPanel !== null,
   });
+
   const infoPanelClasses = classNames({
     'info-panel': true,
     'filter-panel': currentPanel === 'filter',
     'cart-info-panel': currentPanel === 'cart info',
     'search-panel': currentPanel === 'search',
-  })
+  });
 
   function generatePanel(panel) {
     switch (panel) {

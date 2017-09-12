@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { filterMarkers } from '../../actions/map';
 import './filter.scss';
 
-const Filter = (props) => {
+export const Filter = (props) => {
   const { tags, filter, handleFilterMarkers } = props;
   const filterCheckboxes = tags.sort().map((tag) => {
     const formattedName = kebabCase(tag);
