@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DotenvPlugin = require('dotenv-webpack');
 
 const importEnv = new DotenvPlugin({
-  path: path.resolve(__dirname, './config.env'), // Path to .env file (this is the default)
+  path: path.resolve(__dirname, './.env'), // Path to .env file (this is the default)
 });
 
 const extractHtml = new HtmlWebpackPlugin({
