@@ -71,7 +71,7 @@ CartInfo.propTypes = {
     hours: PropTypes.object.isRequired,
     facebook: PropTypes.string,
     twitter: PropTypes.string,
-    website: PropTypes.string.isRequired,
+    website: PropTypes.string,
   }),
 };
 
