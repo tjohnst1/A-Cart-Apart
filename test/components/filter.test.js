@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
-import { Filter } from '../src/components/filter/Filter.jsx';
+import { Filter } from '../../src/components/filter/Filter.jsx';
 
 function setup() {
   const props = {

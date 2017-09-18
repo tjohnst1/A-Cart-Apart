@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
-import { InfoPanel } from '../src/components/infoPanel/InfoPanel.jsx';
-import { Filter } from '../src/components/filter/Filter.jsx';
-import { CartInfo } from '../src/components/infoPanel/CartInfo.jsx';
-import { SearchResults } from '../src/components/infoPanel/SearchResults.jsx';
+import { InfoPanel } from '../../src/components/infoPanel/InfoPanel.jsx';
+import { Filter } from '../../src/components/filter/Filter.jsx';
+import { CartInfo } from '../../src/components/infoPanel/CartInfo.jsx';
+import { SearchResults } from '../../src/components/infoPanel/SearchResults.jsx';
 
 describe("Info Panel", function() {
   const props = {

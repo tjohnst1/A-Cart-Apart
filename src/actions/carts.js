@@ -6,20 +6,20 @@ export const REQUEST_CART_DATA = 'REQUEST_CART_DATA';
 export const RECEIVE_CART_DATA = 'RECEIVE_CART_DATA';
 export const SHOW_CART_INFO = 'SHOW_CART_INFO';
 
-function shouldFetchCartData(state) {
+export function shouldFetchCartData(state) {
   if (state.cartData) {
     return true;
   }
   return false;
 }
 
-function requestCartData() {
+export function requestCartData() {
   return {
     type: REQUEST_CART_DATA,
   };
 }
 
-function receiveCartData(cartData) {
+export function receiveCartData(cartData) {
   return {
     type: RECEIVE_CART_DATA,
     cartData,
@@ -45,7 +45,7 @@ export function getCartDataIfNeeded() {
   };
 }
 
-function showCartInfo(id) {
+export function showCartInfo(id) {
   return {
     type: SHOW_CART_INFO,
     id,

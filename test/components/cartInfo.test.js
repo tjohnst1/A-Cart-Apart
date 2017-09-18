@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
-import CartInfo from '../src/components/infoPanel/CartInfo.jsx';
+import CartInfo from '../../src/components/infoPanel/CartInfo.jsx';
 
 function setup() {
   const props = {

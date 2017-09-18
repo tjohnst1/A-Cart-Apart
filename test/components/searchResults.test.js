@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
-import { SearchResults } from '../src/components/infoPanel/SearchResults.jsx';
+import { SearchResults } from '../../src/components/infoPanel/SearchResults.jsx';
 
 function setup() {
   const props = {
