@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
-import { createMockStore } from 'redux-test-utils';
 import { InfoPanel } from '../src/components/infoPanel/InfoPanel.jsx';
 import { Filter } from '../src/components/filter/Filter.jsx';
 import { CartInfo } from '../src/components/infoPanel/CartInfo.jsx';
