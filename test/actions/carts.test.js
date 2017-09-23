@@ -35,12 +35,14 @@ const obros = [{
   "twitter":null,
   "website":null,
   "id":1
-}]
+}];
+
 const seedData = {
   cartData: [ obros ],
   currentCart: null,
   tags: []
-}
+};
+
 const store = mockStore(seedData);
 
 describe('carts actions', function() {
@@ -66,7 +68,4 @@ describe('carts actions', function() {
     });
   });
 
-  // it('should display the selected cart info', function() {
-  //   console.log(store.dispatch(displaySelectedCartInfo(1)))
-  // });
 })
