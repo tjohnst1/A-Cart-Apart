@@ -22,12 +22,12 @@ const extractStyles = new ExtractTextPlugin({
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, './build'),
     filename: 'bundle.js',
   },
   devServer: {
     inline: true,
-    contentBase: path.resolve(__dirname, './dist'),
+    contentBase: path.resolve(__dirname, './build'),
   // hot: true,
     historyApiFallback: true,
   },
@@ -35,7 +35,7 @@ module.exports = {
     rules: [
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
-        loader: 'file-loader?name=/dist/img/[name].[ext]',
+        loader: 'file-loader?name=/build/img/[name].[ext]',
         query: {
           useRelativePath: process.env.NODE_ENV === 'production',
         },
