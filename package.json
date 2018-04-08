@@ -1,6 +1,7 @@
 {
   "scripts": {
     "start": "webpack-dev-server --hot",
+    "build": "webpack -p",
     "test": "jest ./test"
   },
   "dependencies": {
